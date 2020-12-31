@@ -150,6 +150,25 @@ Es también compatible con librerías para aportar más funcionalidades como pue
 
 \section{Arquitectura del Trabajo}
 
+Este Trabajo de Fin de Grado está incluido dentro de una estructura que está formada por varios proyectos que se explicarán a continuación.
+En el ordenador instalado en la estación de Fuenlabrada está colocado el programa \textit{Echoes Watcher} \cite{echoesWatcher}. Este programa lee el archivo de configuración  generado por Echoes para obtener datos de interés (peak, directorio, nombre estación, etc) y según se van generando ficheros de detecciones, el programa mediante un programa de monitorización, lee esos ficheros y en caso de encontrar alguna detección, se envían los datos a través de un Broker MQTT \cite{singh2015secure} al equipo ubicado en el Centro de Supercomputación y Visualización de Madrid (Cesvima).
+
+Todos los días se procede a hacer un backup de los datos sin filtrar a otro computador del proyecto ubicado en la Escuela Técnica Superior de Ingeniería y Diseño Industrial (ESTIDI).
+
+En el Cesvima se encuentra ubicado el programa StreamGenerator \cite{StreamGenerator}. Este programa está suscrito al broker y puede recibir datos de configuración de la estación y datos de las detecciones. Cuando recibe datos de configuración de las detecciones genera un fichero de liquidsoap \cite{liquidsoap} si no existe o si ha cambiado la configuración de la estación. Este fichero liquidsoap genera una lista de reproducción que está ubicada en el Instituto Astrofísico de Canarias y se trata de un bucle infinito de ruido (basado en el archivo de configuración) y a medida que le llegan detecciones de una estación se altera dicha lista de reproducción para añadir los sonidos generados con la detección que recibe del broker, y una vez que el sonido es reproducido, se borra. 
+Por cada estación existente hay una lista de reproducción, lo que significa que existe un proceso liquidsoap ejecutándose por cada estación.  
+
+
+//TODO
+
+
+
+
+
+
+
+
+
 A continuación, se mostrará la arquitectura general del sistema desarrollado.
 
 \begin{figure}[h]
@@ -159,7 +178,7 @@ A continuación, se mostrará la arquitectura general del sistema desarrollado.
     \label{fig:arquitectura_general}
 \end{figure}
 
-Como se puede observar en la figura \ref{fig:arquitectura_general}, la API RestFul es el software encargado de gestionar e interactuar con la base de datos, sirviendo los datos a los usuarios. Para que el proyecto sea lo más escalable posible se ha decidido separar los servicios de forma que estén debilmente acopladas. 
+Como se puede observar en la figura \ref{fig:arquitectura_general}, la API RestFul es el software encargado de gestionar e interactuar con la base de datos, sirviendo los datos a los usuarios. Para que el proyecto sea lo más escalable posible se ha decidido separar los servicios de forma que estén débilmente acopladas. 
 
 \subsection{Base de Datos}
 Para el proyecto Sonidos del Cielo hemos elegido MongoDB. En gran parte debido a que es una herramienta perfecta para entornos con bajos recursos de computación, no es necesario pagar ningún tipo de licencia, posee una gran comunidad y muy buena documentación, además de muy escalable. La ventaja principal de MongoDB es que los documentos no tienen que seguir una estructura definida, es decir, se puede trabajar con documentos independientes, modificar el contenido de uno de forma individual y no afectar a la estructura.
@@ -183,12 +202,32 @@ La característica principal de MongoDB es la velocidad, dado que está escrito 
 
 \subsubsection{Funcionamiento de MongoDB}
 MongoDB está orientado a documentos. Esto significa que en lugar de guardar los datos en registros se guardan en documentos BSON, que no es otra cosa que un fichero JSON binario.
+Esto es una de las grandes diferencias respecto a las bases de datos relacionales. 
+MongoDb se compone de colecciones que a su vez está formado por documentos documentos. 
 
-MongoDb se compone de colecciones, que es el lugar dónde se agrupan los documentos. Si hiciésemos una comparación con los elementos de una base de datos relacional, se trataría de una tabla. Dentro de cada colección existen múltiples documentos que están compuestos de pares Clave-Valor.
+Si hiciésemos una comparación con los elementos de una base de datos relacional, se trataría de una tabla. Dentro de cada colección existen múltiples documentos que están compuestos de pares Clave-Valor. 
+La principal diferencia respecto a una base de datos relacional es que no es necesario que los documentos de una misma colección tengan el mismo formato ni los mismos campos.
+\newpage
+\subsubsection{Diseño de la Base de Datos}
+
+Las tablas obtenemos desde ficheros que se encuentran en un servidor del Spanish Virual Observatory (SVO) dentro del Departamento de Arquitectura y Tecnología de Sistemas Informáticos (DATSI) de la Escuela Técnica Superior de Ingenieros Informáticos de la Universidad Politécnica de Madrid. A partir de este fichero se crean las tablas que se aprecian en la figura \ref{fig:tablas_base_datos}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.6]{include/figuras/Tablas.png}
+    \caption{Colecciones de la base de datos}
+    \label{fig:tablas_base_datos}
+\end{figure}
+
+Aunque hemos explicado anteriormente que no es estrictamente necesario que existan relaciones entre las tablas, en este proyecto si que es necesario puesto que varias tablas proceden del mismo meteoroide.
+
+
 
 \subsection{Arquitectura aplicación RestFul}
 
-La aplicación RestFul no es más que el software que hace de intermediario para enviar información de la base de datos al cliente o para insertar datos desde el cliente a la base de datos. El cliente es aquel que consume la información, en nuestro caso, el chatbot. El servidor se ha desarrollado en Node.js. Fue diseñado para la construcción de aplicaciones escalables, siendo un punto muy a favor para nuestra elección. Además, puesto que queremos tratar las peticiones de los usuarios, la mejor manera de hacerlo es de forma asíncrona así no es necesario esperar a que se traten las peticiones realizadas con anterioridad.
+La aplicación RestFul no es más que el software que hace de intermediario para enviar información de la base de datos al cliente o para insertar datos desde el cliente a la base de datos. El cliente es aquel que consume la información, en nuestro caso, el chatbot. El servidor se ha desarrollado en Node.js. Fue diseñado para la construcción de aplicaciones escalables, siendo un punto muy a favor para nuestra elección. 
+
+Además, puesto que queremos tratar las peticiones de los usuarios, la mejor manera de hacerlo es de forma asíncrona así no es necesario esperar a que se traten las peticiones realizadas con anterioridad.
 
 
 \begin{figure}[h]
