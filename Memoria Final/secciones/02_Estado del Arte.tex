@@ -1,11 +1,6 @@
-\chapter{Desarrollo}
-\section{Estado del Arte}
+\chapter{Estado del Arte}
 
-Para el desarrollo de este Trabajo de Fin de Grado es necesario utilizar múltiples tecnologías y herramientas. En este capítulo se explicará brevemente el estado actual de los chatbots, las distintas herramientas para desarrollarlos, así como los lenguajes de programación utilizados, qué es el procesamiento natural del lenguaje.
-
-Lo primero que hay que tener en cuenta es que se han desarrollado tres servicios desde cero. Por un lado se ha creado una base de datos no relacional, luego una Api Rest para manejar la base de datos y por último un chatbot que será el que consuma la API y a su vez la base de datos. 
-
-
+\section{Bases de Datos}
 \subsection{Historia de las bases de datos}
 
 Hay que remontarse un poco atrás en el tiempo, concretamente hasta 1880 cuando Herman Hollerith desarrolló una máquina para procesar los datos más rápido de lo que los humanos podían hacerlo. Desarrolló unas tarjetas perforadas mediante las cuales podía realizar un censo de la población completa de Estados Unidos en solo dos años, algo que en esa época era poco más que una quimera. Aun así, la primera vez que se tiene conocimiento del uso del término bases de datos fue en el año 1963 en un simposio celebrado en California y se refiere a ella como un conjunto de información relacionada y que tiene cierta estructura.
@@ -13,6 +8,7 @@ Hay que remontarse un poco atrás en el tiempo, concretamente hasta 1880 cuando 
 Los primeros modelos que fueron desarrollados fueron bases de datos jerárquicas y en red, pero rápidamente se vio que estaban muy limitadas técnicamente y eran demasiado simples. Posteriormente, IBM revolucionó el sector en la década de los 70 creando el modelo relacional de base de datos, mucho más potente y muy bien adoptada por el mundo laboral.
 En los 2000 empezaron a aparecer proyectos de código libre que supusieron una competencia en un sector liderado siempre por sistemas privados (IBM y Oracle), entre los más usados destacan MySQL y PostgreSQL. La tendencia a la utilización de sistemas NoSQL contribuyó al detrimento de los sistemas de bases de datos de las grandes empresas. \cite{sanchez2016historia} 
 
+\subsection{Tipos de Bases de Datos}
 \subsubsection{Bases de Datos Jerárquicas}
 
 Se trata del modelo más antiguo, se ha visto superado por el modelo relacional. El lenguaje de marcado XML utiliza este tipo de modelo para almacenar los datos. El sistema más conocido es el IMS/DB creado por IBM.
@@ -76,10 +72,11 @@ En este modelo, la unidad mínima de almacenamiento de datos es el documento per
 \end{figure}
 
 La idea fundamental de este tipo de modelos es que los datos que tienen relación se guardan en un mismo documento, esto provoca que el número de consultas a la base de datos sea mucho menor que en una base de datos relacional. Son muy útiles para aplicaciones web debido a que puede almacenarse formularios HTML. Con el avance de la web 2.0 estas bases de datos aumentaron exponencialmente su popularidad y son utilizadas hoy en día por plataformas como Google, Facebook, Twitter, Amazon, etc.
-\newpage
 
 
-\section{Historia de los chatbots}
+\section{Asistentes Virtuales}
+
+\subsection{Historia de los Chatbots}
 
 Un chatbot es una aplicación de software capaz de mantener una conversación con un usuario dando una serie de respuestas automáticas, establecidas con anterioridad a diferentes entradas que pueda dar el usuario. Existen distintas teorías sobre el origen de los chatbots. 
 
@@ -102,15 +99,12 @@ Tal vez el chatbot más conocido mundialmente sea el asistente virtual desarroll
 De este mismo estilo tenemos los chatbot \textit{Alexa} creado por Amazon,\textit{Cortana} desarrollado por Microsoft y \textit{Google Now} desarrollado por Google
 
 
-\section{Frameworks y librerías para el desarrollo de chatbots}
 
-Lo primero qué debemos conocer es la diferencia entre un \textit{Framework} y una librería. Un framework es un tipo de estructura con una serie de archivos y pautas que se utiliza para desarrollar proyectos con una estructura y metodología, es decir, algo así como una plantilla que simplifica la creación de una solución. 
-Por otro lado, una librería es uno o varios archivos escritos en algún tipo de lenguaje de programación, que proporcionan varias funcionalidades. Al contrario que un framework, una librería no establece la estructura sobre cómo debe realizarse el desarrollo, sino que da funcionalidades genéricas que han sido programadas con anterioridad y evitan que haya que escribir código de más, aumentando la calidad del código y reduciendo el tiempo de desarrollo.
+\subsection{Frameworks}
 
-\section{Frameworks}
+Un framework es un tipo de estructura con una serie de archivos y pautas que se utiliza para desarrollar proyectos con una estructura y metodología, es decir, algo así como una plantilla que simplifica la creación de una solución.
 
 \subsubsection{DialogFlow}
-
 Framework de desarrollo de chatbots creado en 2010 y mantenido por Google\cite{Dialogflow}. Es capaz de comprender el lenguaje natural y nos brinda herramientas para la fabricación de diálogos y la recreación de conversaciones. Destaca por la gran cantidad de interfaces de conversación en los que se puede desplegar (Google home, google assistant, wereables, teléfonos, coches). Tiene soporte para más de 14 idiomas y es capaz de resolver abreviaturas y funcionar con faltas de ortografía. 
 Posee una interfaz muy intuitiva y permite crear chatbots en una cantidad pequeña de tiempo. 
 \begin{figure}[ht]
@@ -123,9 +117,8 @@ Posee una interfaz muy intuitiva y permite crear chatbots en una cantidad peque�
 
 \subsubsection{Microsoft Bot Framework}
 Desarrollado por Microsoft, crea chatbots rapidamente a través de la herramienta Microsoft Bot Builder y los conecta con Azure Bot Service, lo que nos permite una rápida creación del bot ya que nos proporciona diversas plantillas para seleccionar cuando se está creando el bot y nos brinda todas las mejoras de la nube creada por Microsoft. Puede editarse con directamente desde la página web usando el editor de Azure o algún IDE de desarrollo como Visual Studio o Visual Studio Code \cite{MicrosoftBotBuilder}. Posee su propio sistema de procesamiento natural del lenguaje llamado LUIS (\textit{Language Understanding Intelligent Service}).   
-
 \subsubsection{IBM Watson}
-Creado por IBM, es capaz de comprender y responder a las preguntas de los usuarios mediante lenguaje natural \cite{MicrosoftBotBuilder}. Watson está compuesto actualmente por un clúster de al menos 750 servidores \textit{IBM Power 750}, con unos 16 TB de memoria RAM, lo que proporciona una potencia de cálculo bruto de unos \textbf{80 petaflops}, convirtiéndolo así en uno de los supercomputadores más potentes del mundo. 
+Creado por IBM, es capaz de comprender y responder a las preguntas de los usuarios mediante lenguaje natural \cite{MicrosoftBotBuilder}. Watson está compuesto actualmente por un clúster de al menos 750 servidores \textit{IBM Power 750}, con unos 16 TB de memoria RAM, lo que proporciona una potencia de cálculo bruto de unos \textbf{80 Petalops}, convirtiéndolo así en uno de los supercomputadores más potentes del mundo. 
 
 \subsubsection{Amazon Lex}
 Creado y gestionado por Amazon, permite establecer comuncicaciones con todos sus productos Eco y con su asistente virtual Alexa. Es una de las mejores herramientas en cuanto a conversión de voz a texto. Con esta herramienta se pueden crear bots con un lenguaje natural sofisticado. A diferencia de los anteriores, tiene una interfaz más intuitiva para principiantes aunque por el contrario, dispone de menos herramientas, aunque posee todas las necesarias en un chatbot.
@@ -134,11 +127,13 @@ Creado y gestionado por Amazon, permite establecer comuncicaciones con todos sus
 Por último cabe destacar Rasa, una framework \textit{Open Source} de machine learning que nos permite crear conexiones entre las máquinas y el usuario. Posee herramientas para entender al usuario mediante el componente Rasa NLU (Natural Langugage Understanding), generar el diálogo con Rasa NLG (Natural Language Generation) y un motor (Rasa Core) capaz de definir cuál será la siguiente acción a tomar en función del mensaje transmitido por el usuario.   
 
 
-\section{Librerías}
-Vamos a analizar las librerías existentes para el lenguaje de programación Python, debido a que se trata de un lenguaje simple, elegante ordenado y portable.
+\subsection{Librerías}
+
+una librería es uno o varios archivos escritos en algún tipo de lenguaje de programación, que proporcionan varias funcionalidades. Al contrario que un framework, una librería no establece la estructura sobre cómo debe realizarse el desarrollo, sino que da funcionalidades genéricas que han sido programadas con anterioridad y evitan que haya que escribir código de más, aumentando la calidad del código y reduciendo el tiempo de desarrollo.
+Vamos a analizar las librerías existentes más importantes para el lenguaje de programación Python, debido a que se trata de un lenguaje simple, elegante ordenado, portable y que requiere de pocas líneas de código para generar programas completos.
 
 \subsubsection{Chatterbot}
-Se trata de una librería de machine learning basada en las conversaciones y diálogos tradicionales. Lo más destacable de esta librería es que está diseñada de tal manera que permite crear chatbots que soporten varios idiomas. 
+Se trata de una librería de Machine Learning basada en las conversaciones y diálogos tradicionales. Lo más destacable de esta librería es que está diseñada de tal manera que permite crear chatbots que soporten varios idiomas. 
 
 Es también compatible con librerías para aportar más funcionalidades como puede ser la conversión de texto a voz y así poder interactuar con el usuario sin necesidad de escribir.
 
@@ -148,108 +143,4 @@ Es también compatible con librerías para aportar más funcionalidades como pue
 
 \subsubsection{Tensorflow} Es uan plataforma de código abierto gestionada por Google. Se trata de una biblioteca de aprendizaje automático con la que es posible construir y entrenar redes neuronales para detectar patrones y correlaciones en el aprendizaje y razonamiento de los humanos. 
 
-\section{Arquitectura del Trabajo}
-
-Este Trabajo de Fin de Grado está incluido dentro de una estructura que está formada por varios proyectos que se explicarán a continuación.
-En el ordenador instalado en la estación de Fuenlabrada está colocado el programa \textit{Echoes Watcher} \cite{echoesWatcher}. Este programa lee el archivo de configuración  generado por Echoes para obtener datos de interés (peak, directorio, nombre estación, etc) y según se van generando ficheros de detecciones, el programa mediante un programa de monitorización, lee esos ficheros y en caso de encontrar alguna detección, se envían los datos a través de un Broker MQTT \cite{singh2015secure} al equipo ubicado en el Centro de Supercomputación y Visualización de Madrid (Cesvima).
-
-Todos los días se procede a hacer un backup de los datos sin filtrar a otro computador del proyecto ubicado en la Escuela Técnica Superior de Ingeniería y Diseño Industrial (ESTIDI).
-
-En el Cesvima se encuentra ubicado el programa StreamGenerator \cite{StreamGenerator}. Este programa está suscrito al broker y puede recibir datos de configuración de la estación y datos de las detecciones. Cuando recibe datos de configuración de las detecciones genera un fichero de liquidsoap \cite{liquidsoap} si no existe o si ha cambiado la configuración de la estación. Este fichero liquidsoap genera una lista de reproducción que está ubicada en el Instituto Astrofísico de Canarias y se trata de un bucle infinito de ruido (basado en el archivo de configuración) y a medida que le llegan detecciones de una estación se altera dicha lista de reproducción para añadir los sonidos generados con la detección que recibe del broker, y una vez que el sonido es reproducido, se borra. 
-Por cada estación existente hay una lista de reproducción, lo que significa que existe un proceso liquidsoap ejecutándose por cada estación.  
-
-
-//TODO
-
-
-
-
-
-
-
-
-
-A continuación, se mostrará la arquitectura general del sistema desarrollado.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.4]{{include/figuras/ArquitecturaGeneral.png}}
-    \caption{Arquitectura general}
-    \label{fig:arquitectura_general}
-\end{figure}
-
-Como se puede observar en la figura \ref{fig:arquitectura_general}, la API RestFul es el software encargado de gestionar e interactuar con la base de datos, sirviendo los datos a los usuarios. Para que el proyecto sea lo más escalable posible se ha decidido separar los servicios de forma que estén débilmente acopladas. 
-
-\subsection{Base de Datos}
-Para el proyecto Sonidos del Cielo hemos elegido MongoDB. En gran parte debido a que es una herramienta perfecta para entornos con bajos recursos de computación, no es necesario pagar ningún tipo de licencia, posee una gran comunidad y muy buena documentación, además de muy escalable. La ventaja principal de MongoDB es que los documentos no tienen que seguir una estructura definida, es decir, se puede trabajar con documentos independientes, modificar el contenido de uno de forma individual y no afectar a la estructura.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.2]{include/figuras/mongo.png}
-    \caption{Logo de MongoDB}
-    \label{fig:mongo}
-\end{figure}
-
-La característica principal de MongoDB es la velocidad, dado que está escrito en C++ tiene la capacidad de aprovechar los recursos del sistema de una manera eficiente, es decir, tiene un gran balance entre funcionalidad y rendimiento gracias a su sistema de consulta de contenidos. Las características principales de la plataforma son:
-
-\begin{itemize}
-    \item Consultas ad-hoc: se pueden realizar todo tipo de consultas. Podemos buscar por campos como si de una base de datos relacional se tratase pero además podemos buscar por rango, mediante expresiones regulares.
-    \item Indexación: el concepto es muy parecido al utilizado en las bases de datos relacionales, sin embargo, en MongoDB se puede indexar cualquier campo documentado e incluir múltiples índices secundarios.
-    \item Balanceo de carga: MongoDB posee la capacidad de ejecutarse de manera simultánea en múltiples servidores, dando un servicio de balanceo de carga o de replicación de datos, de manera que es posible mantener el funcionamiento del sistema en caso de un fallo de hardware.
-    \item Almacenamiento de archivos: puede ser utilizado también como almacenamiento de archivos, esta función, conocida como GridFS está incluida en la distribución oficial y permite manipular archivos y su contenido.
-    \item Ejecución de JavaScript en el lado del servidor: es posible realizar consultas utilizando código escrito en JavaScript, haciendo que estas sean enviadas directamente a la base de datos para ser ejecutadas.
-\end{itemize}
-
-\subsubsection{Funcionamiento de MongoDB}
-MongoDB está orientado a documentos. Esto significa que en lugar de guardar los datos en registros se guardan en documentos BSON, que no es otra cosa que un fichero JSON binario.
-Esto es una de las grandes diferencias respecto a las bases de datos relacionales. 
-MongoDb se compone de colecciones que a su vez está formado por documentos documentos. 
-
-Si hiciésemos una comparación con los elementos de una base de datos relacional, se trataría de una tabla. Dentro de cada colección existen múltiples documentos que están compuestos de pares Clave-Valor. 
-La principal diferencia respecto a una base de datos relacional es que no es necesario que los documentos de una misma colección tengan el mismo formato ni los mismos campos.
-\newpage
-\subsubsection{Diseño de la Base de Datos}
-
-Las tablas obtenemos desde ficheros que se encuentran en un servidor del Spanish Virual Observatory (SVO) dentro del Departamento de Arquitectura y Tecnología de Sistemas Informáticos (DATSI) de la Escuela Técnica Superior de Ingenieros Informáticos de la Universidad Politécnica de Madrid. A partir de este fichero se crean las tablas que se aprecian en la figura \ref{fig:tablas_base_datos}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.6]{include/figuras/Tablas.png}
-    \caption{Colecciones de la base de datos}
-    \label{fig:tablas_base_datos}
-\end{figure}
-
-Aunque hemos explicado anteriormente que no es estrictamente necesario que existan relaciones entre las tablas, en este proyecto si que es necesario puesto que varias tablas proceden del mismo meteoroide.
-
-
-
-\subsection{Arquitectura aplicación RestFul}
-
-La aplicación RestFul no es más que el software que hace de intermediario para enviar información de la base de datos al cliente o para insertar datos desde el cliente a la base de datos. El cliente es aquel que consume la información, en nuestro caso, el chatbot. El servidor se ha desarrollado en Node.js. Fue diseñado para la construcción de aplicaciones escalables, siendo un punto muy a favor para nuestra elección. 
-
-Además, puesto que queremos tratar las peticiones de los usuarios, la mejor manera de hacerlo es de forma asíncrona así no es necesario esperar a que se traten las peticiones realizadas con anterioridad.
-
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.2]{include/figuras/node.jpg}
-    \caption{Logo de Node.js}
-    \label{fig:node}
-\end{figure}
-
-Node.js es un entorno de ejecución de JavaScript \cite{javascript} orientado a eventos asíncronos
-
-
-\subsection{}
-
-\subsection{Sección 1 de apartado 1 de capítulo 2}
-
-\subsubsection{Sub sección 1}
-
-\subsubsection{Sub sección 2}
-
-\subsection{Sección 2 de apartado 1 de capítulo 2}
-
-\section{Apartado 2 de capítulo 2}
-
-\section{Apartado 3 de capítulo 2}
+\subsection{Procesamiento de Lenguaje Natural}

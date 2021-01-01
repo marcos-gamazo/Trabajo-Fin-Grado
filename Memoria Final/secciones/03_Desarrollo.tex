@@ -1,0 +1,135 @@
+\chapter{Desarrollo}
+
+Para el desarrollo de este Trabajo de Fin de Grado es necesario utilizar múltiples tecnologías y herramientas. En este capítulo se explicará brevemente el estado actual de los chatbots, las distintas herramientas para desarrollarlos, así como los lenguajes de programación utilizados, qué es el procesamiento natural del lenguaje.
+
+Lo primero que hay que tener en cuenta es que se han desarrollado tres servicios desde cero. Por un lado se ha creado una base de datos no relacional, luego una Api Rest para manejar la base de datos y por último un chatbot que será el que consuma la API y a su vez la base de datos. 
+
+\section{Arquitectura del Proyecto}
+
+Este Trabajo de Fin de Grado está incluido dentro de una estructura que está formada por varios proyectos que se explicarán a continuación, así como de las tecnologías seleccionadas para desarrollar el proyecto.
+En el ordenador instalado en la estación de Fuenlabrada está colocado el programa \textit{Echoes Watcher} \cite{echoesWatcher}. Este programa lee el archivo de configuración  generado por Echoes para obtener datos de interés (peak, directorio, nombre estación, etc) y según se van generando ficheros de detecciones, el programa mediante un programa de monitorización, lee esos ficheros y en caso de encontrar alguna detección, se envían los datos a través de un Broker MQTT \cite{singh2015secure} al equipo ubicado en el Centro de Supercomputación y Visualización de Madrid (Cesvima).
+
+Todos los días se procede a hacer un backup de los datos sin filtrar a otro computador del proyecto ubicado en la Escuela Técnica Superior de Ingeniería y Diseño Industrial (ESTIDI).
+
+En el Cesvima se encuentra ubicado el programa StreamGenerator \cite{StreamGenerator}. Este programa está suscrito al broker y puede recibir datos de configuración de la estación y datos de las detecciones. Cuando recibe datos de configuración de las detecciones genera un fichero de liquidsoap \cite{liquidsoap} si no existe o si ha cambiado la configuración de la estación. Este fichero liquidsoap genera una lista de reproducción que está ubicada en el Instituto Astrofísico de Canarias y se trata de un bucle infinito de ruido (basado en el archivo de configuración) y a medida que le llegan detecciones de una estación se altera dicha lista de reproducción para añadir los sonidos generados con la detección que recibe del broker, y una vez que el sonido es reproducido, se borra. 
+Por cada estación existente hay una lista de reproducción, lo que significa que existe un proceso liquidsoap ejecutándose por cada estación.  
+
+Todos los datos existentes en la estación de Fuenlabrada pasan a través de un Pipeline gestionado mediante \textbf{Apache Airflow}. Este programa es un orquestador de servicios, es decir, es utilizado para automatizar tareas sistemáticas dividiendo estas mismas en subtareas. Los casos de uso más típicos son la automatización de carga de datos, acciones periódicas de mantenimiento y tareas de administración. Para ello permite el uso de herramientas como \textit{cron} y ejecutarlos bajo demanda.
+Mediante esta herramienta se envían los datos a un servidor existente en el Departamento de Arquitectura y Tecnología de Sistemas Informáticos. En este servidor existe una base de datos relacional en MySQL donde se almacenan los datos en bruto del programa Echoes. 
+
+Para entender mejor toda la estructura del proyecto, se incluye el siguiente diagrama explicativo.
+
+\section{Arquitectura General del Trabajo}
+
+A continuación, se mostrará la arquitectura en la que se rige este Trabajo de Fin de Grado.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{{include/figuras/ArquitecturaGeneral.png}}
+    \caption{Arquitectura general}
+    \label{fig:arquitectura_general}
+\end{figure}
+
+Como se puede observar en la figura \ref{fig:arquitectura_general}, la API RestFul es el software encargado de gestionar e interactuar con la base de datos, sirviendo los datos a los usuarios. Para que el proyecto sea lo más escalable posible se ha decidido separar los servicios de forma que estén débilmente acopladas. 
+
+\subsection{Base de Datos}
+Para el proyecto Sonidos del Cielo hemos elegido MongoDB. En gran parte debido a que es una herramienta perfecta para entornos con bajos recursos de computación, no es necesario pagar ningún tipo de licencia, posee una gran comunidad y muy buena documentación, además de muy escalable. La ventaja principal de MongoDB es que los documentos no tienen que seguir una estructura definida, es decir, se puede trabajar con documentos independientes, modificar el contenido de uno de forma individual y no afectar a la estructura.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{include/figuras/mongo.png}
+    \caption{Logo de MongoDB}
+    \label{fig:mongo}
+\end{figure}
+
+La característica principal de MongoDB es la velocidad, dado que está escrito en C++ tiene la capacidad de aprovechar los recursos del sistema de una manera eficiente, es decir, tiene un gran balance entre funcionalidad y rendimiento gracias a su sistema de consulta de contenidos. Las características principales de la plataforma son:
+
+\begin{itemize}
+    \item Consultas ad-hoc: se pueden realizar todo tipo de consultas. Podemos buscar por campos como si de una base de datos relacional se tratase pero además podemos buscar por rango, mediante expresiones regulares.
+    \item Indexación: el concepto es muy parecido al utilizado en las bases de datos relacionales, sin embargo, en MongoDB se puede indexar cualquier campo documentado e incluir múltiples índices secundarios.
+    \item Balanceo de carga: MongoDB posee la capacidad de ejecutarse de manera simultánea en múltiples servidores, dando un servicio de balanceo de carga o de replicación de datos, de manera que es posible mantener el funcionamiento del sistema en caso de un fallo de hardware.
+    \item Almacenamiento de archivos: puede ser utilizado también como almacenamiento de archivos, esta función, conocida como GridFS está incluida en la distribución oficial y permite manipular archivos y su contenido.
+    \item Ejecución de JavaScript en el lado del servidor: es posible realizar consultas utilizando código escrito en JavaScript, haciendo que estas sean enviadas directamente a la base de datos para ser ejecutadas.
+\end{itemize}
+
+\subsubsection{Funcionamiento de MongoDB}
+MongoDB está orientado a documentos. Esto significa que en lugar de guardar los datos en registros se guardan en documentos BSON, que no es otra cosa que un fichero JSON binario.
+Esto es una de las grandes diferencias respecto a las bases de datos relacionales. 
+MongoDb se compone de colecciones que a su vez está formado por documentos documentos. 
+
+Si hiciésemos una comparación con los elementos de una base de datos relacional, se trataría de una tabla. Dentro de cada colección existen múltiples documentos que están compuestos de pares Clave-Valor. 
+La principal diferencia respecto a una base de datos relacional es que no es necesario que los documentos de una misma colección tengan el mismo formato ni los mismos campos.
+
+\subsubsection{Arquitectura de la Base de Datos}
+
+Las tablas obtenemos desde ficheros que se encuentran en un servidor del Spanish Virual Observatory (SVO) dentro del Departamento de Arquitectura y Tecnología de Sistemas Informáticos de la Escuela Técnica Superior de Ingenieros Informáticos de la Universidad Politécnica de Madrid. A partir de este fichero se crean las tablas que se aprecian en la figura \ref{fig:tablas_base_datos}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.6]{include/figuras/Tablas.png}
+    \caption{Colecciones de la base de datos}
+    \label{fig:tablas_base_datos}
+\end{figure}
+
+Aunque hemos explicado anteriormente que no es estrictamente necesario que existan relaciones entre las tablas, en este proyecto si que es necesario puesto que varias tablas proceden del mismo meteoroide.
+
+
+\newpage
+\subsection{Lenguaje de Programación Python}
+
+Tanto para la carga de los documentos en la base de datos como para el desarrollo del chatbot ha sido necesario el uso del lenguaje de programación Python. Python es un lenguaje de programación creado a finales de los años 80 por Guido van Rossum en el Centro para las Matemáticas y la Informática de Países Bajos. Este lenguaje posee una gran flexibilidad que produce código ordenado, limpio y fácilmente legible. Sus principales características pueden resumirse en las siguientes\cite{python}:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{include/figuras/python.png}
+    \caption{Logo de Python}
+    \label{fig:Python}
+\end{figure}
+
+\begin{itemize}
+    \item Gratis: No es necesario pagar licencia para utilizarlo
+    \item Interpretado: se ejecuta sin tener que pasar por un compilador y los errores son detectados en tiempo de ejecución.
+    \item Multiplataforma: está disponible para Windows, Mac y Linux. 
+    \item Tipado dinámico: las variables declaradas se comprueban durante el tiempo de ejecución.
+    \item Multiparadigma: soporta programación funcional, programación imperativa, declarativo, modular, dirigido a eventos, programación asíncrona, lógico, estructurado, con restricciones y programación orientada a objetos.
+\end{itemize}
+
+Es un lenguaje que se tiene una curva de aprendizaje muy rápida, además cuenta con una gran comunidad lo que hace que existan librerías y módulos especializados desarrollados como \textit{pandas} (tratamiento de datos) \textit{librosa} (para procesamiento de audio), \textit{sklearn} (machine-learning) o frameworks como \textit{Django} (para desarrollo web) o en nuestro caso, \textbf{RASA} para desarrollar un chatbot. 
+
+\subsection{Arquitectura aplicación RestFul}
+
+La aplicación RestFul no es más que el software que hace de intermediario para enviar información de la base de datos al cliente o para insertar datos desde el cliente a la base de datos. El cliente es aquel que consume la información, en nuestro caso, el chatbot. El servidor se ha desarrollado en Node.js. Fue diseñado para la construcción de aplicaciones escalables, siendo un punto muy a favor para nuestra elección. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.15]{include/figuras/node.jpg}
+    \caption{Logo de Node.js}
+    \label{fig:node}
+\end{figure}
+
+\subsubsection{Funcionamiento de Node.js}
+
+Node.js es un entorno de ejecución de JavaScript \cite{javascript} orientado a eventos asíncronos. Comparándolo con servicios web clásicos donde cada nueva conexión genera un nuevo subproceso (ocupando memoria RAM del sistema) y normalmente ocupando toda la memoria RAM disponible. Node.js trabaja en un subproceso únicamente, utilizando el modelo entrada y entrada sin bloqueo de la salida, esto permite soportar una cantidad enorme de conexiones simultáneas mantenidas dentro del bucle de eventos. El servidor consta de un subproceso que trata un evento tras otro.
+Cuando se produce una nueva solicitud se genera un evento. El servidor comienza a procesarlo y cuando se produce una operación de bloqueo de la entrada/salida, no espera a que se termine sino que se crea una \textit{función de callback}. El servidor comienza instantáneamente a procesar otro evento y cuando termine la operación de entrada/salida, seguirá trabajando en la solicitud ejecutando la función de callback tan pronto como sea posible.
+
+Gracias a este mecanismo, el servidor no necesita crear subprocesos lo que significa que no tiene apenas sobrecarga. Además, puesto que queremos tratar las peticiones de los usuarios, la mejor manera de hacerlo es de forma asíncrona así no es necesario esperar a que se traten las peticiones realizadas con anterioridad.
+
+
+\subsubsection{Ventajas de utilizar Node.js}
+
+Node.js es la plataforma de software más utilizada en la actualidad por encima de otros entornos de ejecución y lenguajes de programación como pueden ser C o PHP a la vez que tiene un tiempo de ejecución mucho mayor. No es un lenguaje de programación complejo pero requiere una mayor comprensión y cantidad de líneas de código que PHP. Cuando hablamos de Node.js hay algo que es necesario destacar, el conocido como Node Package Manager (NPM) que viene por defecto con la instalación de Node.js.
+
+
+\subsubsection{Librerías utilizadas}A continuación se especificarán los paquetes utilizados para el desarrollo de la API RestFul.
+
+\begin{itemize}
+    \item Async: es un módulo que proporciona funciones sencillas para el tratamiento de llamadas asíncronas.
+    \item Body-parser: es un middleware encargado de extraer todo el cuerpo de una request entrante y la muestra en el \textit{req.body} 
+    \item Cors: este paquete se encarga de controlar el mecanismo que utilizan las cabeceras HTTP para permitir que un \textit{user agent} tenga permiso para acceder a ciertos recursos desde un servidor en un dominio distinto al que pertenece.
+    \item Dotenv: Sirve para cargar variables de entorno desde un fichero .env.
+    \item Express: es un framework de desarrollo web inspirado en Sinatra y por consiguiente, el estandar de la gran mayoría de aplicaciones de Node.js. Es la librería que utilizaremos para desplegar el servidor de la API.  
+    \item Mongoose: es una herramienta encargada del tratamiento de bases de datos MongoDB de manera asíncrona.
+    \item Nodemon: este paquete simplifica la tarea de volver a iniciar la aplicación cada vez que se realice un cambio en el código. Es un demonio que se ejecuta en segundo plano y es el encargado de comprobar los cambios e iniciar el servidor.
+    \item Swagger-Jsdoc: genera definiciones OpenAPI a partir de comentarios JSDoc.
+    \item Swagger-UI-Express: crea la interfaz de usuario de Swagger en base a las definiciones creadas con Swagger-JSDoc.
+\end{itemize}
