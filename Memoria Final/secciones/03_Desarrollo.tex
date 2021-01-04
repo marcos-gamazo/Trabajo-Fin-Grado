@@ -64,15 +64,32 @@ La principal diferencia respecto a una base de datos relacional es que no es nec
 
 Las tablas obtenemos desde ficheros que se encuentran en un servidor del Spanish Virual Observatory (SVO) dentro del Departamento de Arquitectura y Tecnología de Sistemas Informáticos de la Escuela Técnica Superior de Ingenieros Informáticos de la Universidad Politécnica de Madrid. A partir de este fichero se crean las tablas que se aprecian en la figura \ref{fig:tablas_base_datos}
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[scale=0.6]{include/figuras/Tablas.png}
+    \includegraphics[width=\textwidth]{include/figuras/Tablas.png}
     \caption{Colecciones de la base de datos}
     \label{fig:tablas_base_datos}
 \end{figure}
 
 Aunque hemos explicado anteriormente que no es estrictamente necesario que existan relaciones entre las tablas, en este proyecto si que es necesario puesto que varias tablas proceden del mismo meteoroide.
 
+Una vez creada la base de datos y establecer usuarios para restringir el acceso a la misma, podemos realizar operaciones de consulta, inserción, eliminación y actualización de documentos, colecciones y bases de datos a través de la consola incluida dentro del paquete de instalación de MongoDB. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{include/capturas/TerminalMongo.png}
+    \caption{Operación con terminal de mongo}
+    \label{fig:terminal_mongo}
+\end{figure}
+
+También existen herramientas gráficas para modificar cualquier parámetro de una base de datos en Mongo como puede ser MongoDB Compass o Robo 3T. Estas herramientas proporcionan una vía más sencilla y visual para trabajar con las bases de datos además de no tener que aprender o buscar dentro de la documentación los comandos necesarios para manejar una interfaz de línea de comandos propietaria. Aunque también nos permite el ejecutar comandos como si se tratase del terminal como se puede observar en la figura \ref{fig:robo3t}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{include/capturas/Robo3T.png}
+    \caption{Interfaz de Robo3T}
+    \label{fig:robo3t}
+\end{figure}
 
 \newpage
 \subsection{Lenguaje de Programación Python}
@@ -133,3 +150,117 @@ Node.js es la plataforma de software más utilizada en la actualidad por encima 
     \item Swagger-Jsdoc: genera definiciones OpenAPI a partir de comentarios JSDoc.
     \item Swagger-UI-Express: crea la interfaz de usuario de Swagger en base a las definiciones creadas con Swagger-JSDoc.
 \end{itemize}
+
+\subsection{Visual Studio Code}
+
+Visual Studio Code es un editor gratuito y de código abierto desarrollado por Microsoft y que se distribuye mediante licencia MIT. \footnote{Licencia MIT: licencia creada en el Instituto Tecnológico de Massachusetts, se trata de una licencia de software libre que impone muy pocas restricciones en su reutilización} Se trata de un software multiplataforma (Windows, macOS y Linux).
+Está creado en NodeJS y Electron \cite{electron} y con Blink como motor gráfico.
+
+Se trata de un editor hackeable, es decir, permite modificar el comportamiento del editor completamente (tema del editor, atajos de teclado, preferencias, etc), tiene soporte para Git integrado, autocompletado de código, terminal integrado y debugger.
+
+Además posee una biblioteca de extensiones \ref{fig:vscode} mediante la cual puedes añadir herramientas que ayuden en los proyectos o visualizar el código de forma más eficiente. También posees un live server a través del cual puedes visualizar código web en tu navegador predeterminado inmediatamente según guardas el código sin ser necesario refrescar.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{include/figuras/VSCode.png}
+    \caption{Visual Studio Code}
+    \label{fig:vscode}
+\end{figure}
+
+A continuación se explicará brevemente las extensiones utilizadas:.
+
+\begin{itemize}
+    \item \textbf{Docker}: esta extensión simplifica la forma en la que construir, controlar y desplegar aplicaciones \textit{dockerizadas}, además proporciona herramientas dentro de un contenedor para realizar debugging de aplicaciones desarrolladas en Node.js, Python y .NET Core.
+    \item \textbf{YAML}: proporciona compatibilidad completa con el lenguaje YAML con compatibilidad para la sintaxis de Kubernetes.
+    \item \textbf{MarkdownLint}: incluye una biblioteca de reglas para entender los estándares y la coherencia de los archivos Markdown. 
+    \item \textbf{TODO Tree}: esta extensión busca rápidamente las etiquetas TODO y FIXME y las muestra en un árbol. 
+\end{itemize}
+
+
+\subsection{Git y Github}
+
+
+En el desarrollo de cualquier proyecto de software surge la necesidad de gestionar los cambios que se producen entre versiones diferentes de un mismo código fuente. Habitualmente este proceso se inicia utilizando sufijos en los ficheros que se modifican (v1, antiguo, nuevo) pero este proceso no es ni eficiente ni práctico, mucho menos si trabajamos en equipo, dando lugar a la eliminación de archivos válidos realizados por otros componentes del equipo, incapacidad de conocer que cambios se han realizado, etc.
+
+En todo proyecto, más tarde o más temprano aparece la necesidad de trabajar en distintas ramas, en el entorno empresarial suelen ser desarrollo y producción. En la rama de desarrollo se procede a introducir las nuevas modificaciones y en la rama de desarrollo las versiones estables del programa.
+
+Para ayudarnos con esta tarea aparecen soluciones como Git, CVS que realizan tareas fundamentales como pueden ser:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.1]{include/figuras/Git.png}
+    \caption{Logo de Git}
+    \label{fig:git}
+\end{figure}
+
+\begin{itemize}
+    \item Comparación de ficheros de tal manera que rápidamente encontremos las diferencias entre los dos. 
+    \item Restauración de versiones anteriores.
+    \item Fusionar versiones.
+    \item Trabajar con varias ramas de un proyecto.
+    \item Facilitar la colaboración.
+\end{itemize}
+
+
+En el caso del proyecto Sonidos del Cielo la herramienta de control de versiones utilizada ha sido \textbf{Git}. 
+
+Git surgió de la mano de Linus Torvals \cite{torvalds2005git}, es un sistema de control de versiones de código abierto, multiplataforma, lo que nos permite crear repositorios en cualquier sistema operativo. Existen gran variedad de herramientas gráficas para manejar Git pero lo más utilizado el la línea de comandos dado que, una vez aprendidos los comandos básicos, nos permite realizar las operaciones con mayor velocidad. 
+
+Github es un servicio para alojar repositorios creado en San Francisco en el año 2008. Está pensado para compartir código fuente en cualquier lenguaje de programación y dejarlo a disposición de cualquiera que quiera reutilizarlo siempre y cuando haya permiso para ello. Si cualquier otro usuario que no sea el creador del proyecto puede realizar un \textit{fork}, un fork no es otra cosa sino que la creación de una copia de otro proyecto en otro repositorio.
+También hay repositorios privados en los que sólo el creador del repositorio y las personas a las que el de acceso podrán participar.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{include/capturas/gitInit.png}
+    \caption{Inicialización de repositorio en Git}
+    \label{fig:git_init}
+\end{figure}
+
+
+Github cuenta con diversas herramientas de las que las más destacables son:
+
+\begin{itemize}
+    \item Gollum: permite la creación de wikis basadas en git.
+    \item Sistema de revisión de código: para añadir comentarios y discutir sobre las modificaciones realizadas.
+    \item Visor de ramas: dónde podremos revisar los avances del repositorio.
+    \item Herramienta de seguimiento de problemas: nos permite abrir tickets de incidencias o mejoras a realizar.
+\end{itemize}
+
+
+\subsection{Swagger}
+Una de las partes más importantes en cualquier proyecto es la documentación del código. Es muy habitual en nuestro campo que hay que modificar, mantener o simplemente que utilizar código desarrollado por otra persona y se convierte en una tarea ardua que obliga a invertir demasiado tiempo en comprenderlo. 
+
+Para evitar estas situaciones es habitual adaptar herramientas que permitan comentar el código fuente del software que desarrollemos de tal manera que sea legible por cualquier persona. En el proyecto Sonidos del Cielo se ha decidido seleccionar la herramienta \textit{Swagger} para documentar la API RestFul. 
+
+Swagger se compone de una serie de herramientas, reglas y especificaciones mediante las cuales podremos documentar y probar una API de una manera sencilla. La principal baza para utilizar Swagger es que es realmente sencilla de implementar y cualquier persona es capaz de entenderlo, tenga conocimientos de programación o no. Esto es posible gracias a \textbf{Swagger UI}, es una de las características más importantes de la plataforma, esta herramienta nos permite organizar las operaciones CRUD de la API basándose en los ficheros YAML o JSON y creando un entorno interactivo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{include/capturas/SwaggerEditorOnline.png}
+    \caption{Swagger Editor}
+    \label{fig:swagger_online}
+\end{figure}
+
+Para esta tarea podemos utilizar la versión del editor en línea, \textit{Swagger editor} que proporciona la plataforma como se muestra en la figura \ref{fig:swagger_online}, esta herramienta nos indicará los errores que se hayan cometido y además brindará sugerencias y alternativas para mejorar la documentación.
+
+Nuestra implementación pasa por la utilización de Swagger y Swagger UI como varios paquetes instalables dentro de Node.js a través del instalador npm. Dentro de la definición del servidor se incluyen las opciones del servidor como se muestra en la figura \ref{fig:swagger_options} entre las que cabe destacar la versión del API Rest, la versión OpenAPI o la información del proyecto.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{include/capturas/SwaggerOptions.png}
+    \caption{Opciones del servidor de Swagger}
+    \label{fig:swagger_options}
+\end{figure}
+
+Una vez establecido los parámetros básicos del servidor y haber definido los componentes que forman la API Rest es momento de añadir el código YAML para crear la documentación de los distintos métodos. En ese código se indica el tipo de formato que se produce, \textbf{JSON} en nuestro caso, los códigos de respuesta que proporciona la API.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.7]{include/capturas/SwaggerYAML.png}
+    \caption{Definición Swagger}
+    \label{fig:swagger_definition}
+\end{figure}
+
+Una vez estén comentados todos los métodos de nuestra API, se genera una interfaz gráfica similar a la mostrada en la figura \ref{fig:swagger_online} en el \textit{endpoint} que hayamos definido en dónde se pueden probar los métodos comentados a lo largo del código.
+
+\subsection{Postman}

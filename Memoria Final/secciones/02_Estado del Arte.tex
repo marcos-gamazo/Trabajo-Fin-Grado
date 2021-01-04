@@ -87,18 +87,33 @@ La segunda, más extendida, sitúa el origen en el año 1966 en el Instituto Tec
 En 1972, surgió el chatbot \textit{Parry}, que simulaba ser una persona con esquizofrenia paranoide. A diferencia de Eliza disponía de una estrategia de comunicación cimentada en premisas y ''respuestas emocionales'' en base a las interacciones con los usuarios. \cite{StreamGenerator}
 
 Como detalle curioso, Eliza y Parry fueron puestos a conversar entre sí mediante la red ARPANET \footnote{ARPANET: red de ordenadores creada por el Departamento de Defensa de los Estados Unidos para conectar varias instituciones académicas y estatales.}  
-
 Posteriormente fue desarrollado \textit{Jabberwacky} por el programador inglés Rollo Carpenter, capaz de mantener una conversación mediante la voz. Aunque fue terminado en 1981 no fue hasta 1997 cuando fue publicado online.
-
 A partir del año 2006 han surgido una gran cantidad de chatbots entre los que cabe destacar:
 
 IBM Watson, nombrado así por el primer director ejecutivo de IBM. En un principio fue desarrollado para responder preguntas y respuestas ideadas por humanos para el concurso Jeopardy. El concurso es el típico de preguntas y respuestas solo que las preguntas son formuladas mediante juegos de palabras y giros lingüisticos. Se presentó al concurso en 2011 por primera vez y fue capaz de ganar a dos especialistas. A partir de ese instante, ha pasado por varias adaptaciones utilizando procesamiento de lenguaje natural y machine learning\footnote{Machine Learning: disciplina dentro de la Inteligencia Artificial que crea sistemas y software capaces de aprender automáticamente} para procesar una gran cantidad de datos. En 2013, IBM anunció que Watson podía ser utilizado para la toma de decisiones en el tratamiento del cáncer de pulmón. 
 
 Tal vez el chatbot más conocido mundialmente sea el asistente virtual desarrollado por Apple, \textit{Siri}. Utiliza consultas dadas mediante comandos de voz para ayudar al usuario de diversas formas, realizar tareas, recordatorios, búsquedas y modificar configuraciones del sistema.
 
-De este mismo estilo tenemos los chatbot \textit{Alexa} creado por Amazon,\textit{Cortana} desarrollado por Microsoft y \textit{Google Now} desarrollado por Google
+De este mismo estilo tenemos los chatbot \textit{Alexa} creado por Amazon,\textit{Cortana} desarrollado por Microsoft y \textit{Google Now} desarrollado por Google.
 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{{include/figuras/siri.png}}
+    \caption{Interfaz de Siri}
+    \label{fig:siri_gui}
+\end{figure}
+
+La utilización de estos asistentes ha crecido exponencialmente debido a la necesidad de dar servicios a los clientes, sin importar la hora ni el lugar ya que están siempre disponibles cuando el usuario lo necesite.
+Hoy en día se están implementando cada vez más en servicios de mensajería instantánea para la transmisión de noticias, las más destacables son Telegram, Slack, Whatsapp, Discord, Skype, Kik y WeChat
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{include/figuras/BotFather.png}
+    \caption{Telegram BotFather}
+    \label{fig:telegram}
+\end{figure}
+Alguna de estas aplicaciones han desarrollado servicios mediante los cuales puedes crear nuevos bots sin tener que programar una sola linea de código, como puede ser BotFather de Telegram. Así como tiendas con búsquedas y sistemas de valoraciones para aumentar el uso de estas aplicaciones. 
 
 \subsection{Frameworks}
 
@@ -107,7 +122,8 @@ Un framework es un tipo de estructura con una serie de archivos y pautas que se 
 \subsubsection{DialogFlow}
 Framework de desarrollo de chatbots creado en 2010 y mantenido por Google\cite{Dialogflow}. Es capaz de comprender el lenguaje natural y nos brinda herramientas para la fabricación de diálogos y la recreación de conversaciones. Destaca por la gran cantidad de interfaces de conversación en los que se puede desplegar (Google home, google assistant, wereables, teléfonos, coches). Tiene soporte para más de 14 idiomas y es capaz de resolver abreviaturas y funcionar con faltas de ortografía. 
 Posee una interfaz muy intuitiva y permite crear chatbots en una cantidad pequeña de tiempo. 
-\begin{figure}[ht]
+
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{{include/figuras/DialogFlow.png}}
     \caption{Interfaz de dialogflow}
@@ -116,7 +132,11 @@ Posee una interfaz muy intuitiva y permite crear chatbots en una cantidad peque�
 
 
 \subsubsection{Microsoft Bot Framework}
-Desarrollado por Microsoft, crea chatbots rapidamente a través de la herramienta Microsoft Bot Builder y los conecta con Azure Bot Service, lo que nos permite una rápida creación del bot ya que nos proporciona diversas plantillas para seleccionar cuando se está creando el bot y nos brinda todas las mejoras de la nube creada por Microsoft. Puede editarse con directamente desde la página web usando el editor de Azure o algún IDE de desarrollo como Visual Studio o Visual Studio Code \cite{MicrosoftBotBuilder}. Posee su propio sistema de procesamiento natural del lenguaje llamado LUIS (\textit{Language Understanding Intelligent Service}).   
+Desarrollado por Microsoft, crea chatbots rapidamente a través de la herramienta Microsoft Bot Builder y los conecta con Azure Bot Service, lo que nos permite una rápida creación del bot ya que nos proporciona diversas plantillas para seleccionar cuando se está creando el bot y nos brinda todas las mejoras de la nube creada por Microsoft. Puede editarse con directamente desde la página web usando el editor de Azure o algún IDE de desarrollo como Visual Studio o Visual Studio Code \cite{MicrosoftBotBuilder}. Posee su propio sistema de procesamiento natural del lenguaje llamado LUIS (\textit{Language Understanding Intelligent Service}).  
+
+
+
+
 \subsubsection{IBM Watson}
 Creado por IBM, es capaz de comprender y responder a las preguntas de los usuarios mediante lenguaje natural \cite{MicrosoftBotBuilder}. Watson está compuesto actualmente por un clúster de al menos 750 servidores \textit{IBM Power 750}, con unos 16 TB de memoria RAM, lo que proporciona una potencia de cálculo bruto de unos \textbf{80 Petalops}, convirtiéndolo así en uno de los supercomputadores más potentes del mundo. 
 
@@ -124,16 +144,17 @@ Creado por IBM, es capaz de comprender y responder a las preguntas de los usuari
 Creado y gestionado por Amazon, permite establecer comuncicaciones con todos sus productos Eco y con su asistente virtual Alexa. Es una de las mejores herramientas en cuanto a conversión de voz a texto. Con esta herramienta se pueden crear bots con un lenguaje natural sofisticado. A diferencia de los anteriores, tiene una interfaz más intuitiva para principiantes aunque por el contrario, dispone de menos herramientas, aunque posee todas las necesarias en un chatbot.
 
 \subsubsection{Rasa}
-Por último cabe destacar Rasa, una framework \textit{Open Source} de machine learning que nos permite crear conexiones entre las máquinas y el usuario. Posee herramientas para entender al usuario mediante el componente Rasa NLU (Natural Langugage Understanding), generar el diálogo con Rasa NLG (Natural Language Generation) y un motor (Rasa Core) capaz de definir cuál será la siguiente acción a tomar en función del mensaje transmitido por el usuario.   
+Por último cabe destacar Rasa, una framework \textit{Open Source} de Machine Learning que nos permite crear conexiones entre las máquinas y el usuario. Posee herramientas para entender al usuario mediante el componente Rasa NLU (Natural Langugage Understanding), generar el diálogo con Rasa NLG (Natural Language Generation) y un motor (Rasa Core) capaz de definir cuál será la siguiente acción a tomar en función del mensaje transmitido por el usuario.   
 
 
 \subsection{Librerías}
 
-una librería es uno o varios archivos escritos en algún tipo de lenguaje de programación, que proporcionan varias funcionalidades. Al contrario que un framework, una librería no establece la estructura sobre cómo debe realizarse el desarrollo, sino que da funcionalidades genéricas que han sido programadas con anterioridad y evitan que haya que escribir código de más, aumentando la calidad del código y reduciendo el tiempo de desarrollo.
+Una librería es uno o varios archivos escritos en algún tipo de lenguaje de programación, que proporcionan varias funcionalidades. Al contrario que un framework, una librería no establece la estructura sobre cómo debe realizarse el desarrollo, sino que da funcionalidades genéricas que han sido programadas con anterioridad y evitan que haya que escribir código de más, aumentando la calidad del código y reduciendo el tiempo de desarrollo.
 Vamos a analizar las librerías existentes más importantes para el lenguaje de programación Python, debido a que se trata de un lenguaje simple, elegante ordenado, portable y que requiere de pocas líneas de código para generar programas completos.
 
 \subsubsection{Chatterbot}
-Se trata de una librería de Machine Learning basada en las conversaciones y diálogos tradicionales. Lo más destacable de esta librería es que está diseñada de tal manera que permite crear chatbots que soporten varios idiomas. 
+Se trata de una librería de Machine Learning basada en las conversaciones y diálogos tradicionales. Está diseñada de manera independiente al idioma, por lo que se puede entrenar en cualquier lenguaje que está asegurado su correcto funcionamiento. 
+El Machine Learning implementado en Chatterbot consigue que mediante la interactuación con los humanos permite que mejore su propio conocimiento. También es posible implementarlo junto a otras librerías para añadir funcionalidad como Text to Speech \footnote{Text to Speech: por sus siglas en inglés TTS, procedimiento de síntesis mediante el cual se transforma el texto escrito en voz.}
 
 Es también compatible con librerías para aportar más funcionalidades como puede ser la conversión de texto a voz y así poder interactuar con el usuario sin necesidad de escribir.
 
@@ -141,6 +162,111 @@ Es también compatible con librerías para aportar más funcionalidades como pue
 
 \subsubsection{ChatbotAI} Nos permite crear un chatbot con muy pocas líneas de código. Genera un controlador del chat y bots con inteligencia artificial que permiten una integración muy sencilla con API Rest. Esta inteligencia artificial nos genera múltiples características como aprender, memorizar, manejar conversaciones según el tema \cite{chatbotAI}. 
 
-\subsubsection{Tensorflow} Es uan plataforma de código abierto gestionada por Google. Se trata de una biblioteca de aprendizaje automático con la que es posible construir y entrenar redes neuronales para detectar patrones y correlaciones en el aprendizaje y razonamiento de los humanos. 
+\subsubsection{Tensorflow} Es uan plataforma de código abierto gestionada por Google. Se trata de una biblioteca de aprendizaje automático con la que es posible construir y entrenar redes neuronales para detectar patrones y correlaciones en el aprendizaje y razonamiento de los humanos. Tiene diversas formas de interacción con el usuario (interfaces web, API Rest, interfaces gráficas de usuario, y líneas de comandos).
 
 \subsection{Procesamiento de Lenguaje Natural}
+Una de las partes más importantes de un asistente virtual es el Natural Lenguage Processinng (NLP), gracias a esta herramienta, el programa es capaz de entender la forma en la que nos expresamos los humanos. 
+El procesamiento del lenguaje natural es una rama de la inteligencia artificial la cual se encarga de analizar y estudiar las interacciones en lenguaje natural entre los humanos y los ordenadores. Este campo posee varias funciones atrayentes.
+
+\begin{itemize}
+    \item \textbf{Comprensión del lenguaje natural}: mediante esta función el programa consigue analizar lo que dice el usuario y comprender el mensaje. Para ello es estrictamente necesario que exista una base de datos del lenguaje en el que queremos que se exprese el chatbot de manera que pueda comprender la gramática, la semántica y el vocabulario del lenguaje que queremos que domine.
+    \item \textbf{Recuperación de la información}: esta parte es la encargada de extraer las palabras claves del texto proporcionado.
+    \item \textbf{Generación del lenguaje natural}: capacidad de dar respuestas a los mensajes enviados en lenguaje natural. Esta parte del programa se encarga de escoger las posibles respuestas y establecer un orden para que la respuesta proporcionada sea la más indicada y correcta gramaticalmente.
+    \item \textbf{Reconocimiento y síntesis del lenguaje hablado}: hace que el chatbot sea capaz de transformar las respuestas que se le entregan mediante el habla y transformarlas a texto para su tratamiento. Una vez la respuesta del chatbot se genere, el módulo se encargará de convertirla a voz.
+    \item \textbf{Detección de emociones y sentimientos}: hay ciertos programas que a través del estudio del lenguaje de las entradas que da el usuario son capaces de detectar los sentimientos y emociones.
+\end{itemize}
+
+\subsection{Ventajas e Inconvenientes de Utilizar Chatbots en un Entorno Profesional}
+El afloramiento de los asistentes virtuales ha permitido la mejora y la automatización de procesos y servicios dentro del entorno profesional pero al no tener todas las habilidades que posee un humano, su utilización también posee ciertos inconvenientes.
+
+\subsubsection{Ventajas}
+
+\begin{itemize}
+    \item Disponibilidad: un chatbot una vez implementado puede funcionar 24 horas al día 7 días a la semana.
+    \item Reducción de costes: puesto que es capaz de responder las preguntas más frecuentes y realizar las tareas más solicitadas no será necesario tener asistentes humanos, permitiendo una reducción de costes y su posible utilización en otros campos más necesarios.
+    \item Auto-aprendizaje: posee algún tipo de inteligencia artificial es capaz de aprender nuevos comportamientos a través de las interacciones con los clientes así como nuevos comportamientos que no hayan sido programados. 
+    \item Eficiencia: Un asistente humano tiene una capacidad limitada de atención en un rango de tiempo mientras que el asistente puede tener tantas instancias como sea necesario.
+\end{itemize}
+
+
+
+\subsubsection{Inconvenientes}
+
+\begin{itemize}
+    \item Inteligencia: aunque tenga implementado inteligencia artificial, un asistente no es más inteligente que un humano y hay veces que no entiende el mensaje que el usuario le entrega y puede provocar un atasco del proceso. Esto puede llevar a que si el usuario pierde la paciencia, no se complete el proceso de compra.
+    \item Tiempo: es necesario emplear tiempo en entrenar al asistente.
+    \item Toma de decisiones: un chatbot no es capaz de decidir en base a lo que se haya enseñado con anterioridad.
+    \item Coste: es cierto que la implementación de un chatbot permite reducir los costes de mano de obra aunque si bien es cierto que en un primer momento el coste de implementarlo puede ser mayor puesto que hay que programarlo de tal manera que se adapte al campo de la empresa, es decir, hay que especializarlo.
+\end{itemize}
+
+
+\subsection{Principales Aplicaciones de los Chatbots}
+
+\subsubsection{Información}
+Durante una crisis sanitaria como la que está viviendo el planeta con el virús SARS-CoV-2 la tendencia más normal es que noticias falsas o bulos se propaguen con una gran velocidad aunque cada día hay más gente que busca información y ayuda a través de recursos en línea. 
+
+Para todos ellos, la Organización Mundial de la Salud (OMS) \cite{oms} ha desarrollado un chatbot para que las personas se mantengan informadas mediante un chatbot implementado en la aplicación de mensajería instantánea WhatsApp, ha sido diseñado de tal manera que permita dar información rápida y fiable sobre temas relacionados con el coronavirus. Se trata de un bot que funciona mediante comandos, utilizando emojis o palabras que nos indica el propio bot nos proporcionará información sobre varios temas como podemos observar en la figura \ref{fig:oms}. De momento el bot sólo esta disponible en inglés aunque está en estudio el ampliarlo a castellano, árabe, chino, francés y ruso.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{include/figuras/oms.png}
+    \caption{Interfaz World Health Organization}
+    \label{fig:oms}
+\end{figure}
+
+\subsubsection{Salud}
+En consecuencia a lo expuesto en la sección anterior, mucha gente en contraindicación de lo que aconsejan los médicos busca información sobre los síntomas que puedan padecer a través de internet. En esta línea se desarrolló Woebot \cite{woebot}, un chatbot que ayuda a reducir los síntomas de la depresión escuchando de forma activa los mensajes que envía el usuario y reaccionando a ellos con ánimo y con GIFs divertidos a mensajes positivos. Combina años de investigación en el campo de la psicología con la inteligencia artificial y el procesamiento del lenguaje natural permitiendo que se evalúe el estado emocional del usuario y guiándolo para recibir la ayuda correcta de los profesionales necesarios en el momento adecuado.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.15]{include/figuras/woebot.jpg}
+    \caption{Interfaz Woebot}
+    \label{fig:woebot}
+\end{figure}
+
+
+\subsubsection{Viajes}
+Un bot de viaje puede ahorrar una cantidad significativa de tiempo a los usuarios (organización del viaje, lugares de interés a visitar) además mediante el uso de inteligencia artificial han hecho que varias empresas del sector turísitico se lancen a la implementación de un chatbot que por un lado aumente su número de ventas y por otro reduzca la cantidad de personas necesarias para contestar a todos los usuarios con dudas.
+A día de hoy, uno de los mejores chatbots de la industria es el desarrollado por KLM Royal Dutch Airlines \cite{klm}, este chatbot funciona a través de Facebook Messenger pero con la particularidad que utiliza un complemento de casilla de verificación de Facebook Messenger a la hora de realizar el pago de tal manera que capaz de proporcionar información sobre la tarjeta de embarque, el check-in y actualizaciones del estado del vuelo a través de la aplicación de mensajería instantánea.
+Antes de la implementación del chatbot, KLM tenía que contestar unas 15000 conversaciones a la semana a través de las redes sociales en una docena de idiomas distintos, para poder tratar todas estas conversaciones se requiere una gran cantidad de personal y aún así existirán horarios en los cuales no se pueda conversar con el usuario. Para solucionarlo comenzaron a estudiar varias formas para prestar una atención excelente en cualquier momento del día, rápida y personalizada, como resultado llegaron a la conclusión de implementar un chatbot. 
+En el primer mes de funcionamiento, el volumen de mensajes en Facebook aumentó un 40 por ciento y envió 1.7 millones de mensajes a más de 500000 clientes.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{include/figuras/klm-chatbot.jpg}
+    \caption{Interfaz gráfica chatbot KLM}
+    \label{fig:klm}
+\end{figure}
+
+
+\subsubsection{Banca}
+En los últimos tiempos los bancos están intentando mejorar las relaciones y la comunicación con sus clientes. Este sector tiene fama de utilizar aplicaciones y sistemas arcaicos pero cada vez son mas las entidades que buscan actualizarse y llegar a más clientes. 
+El holding bancario Capital One \cite{eno} es uno de los más grandes de Estados Unidos y en 2018 lanzó su chatbot \textit{ENO}, se trata de un chatbot conversacional, es decir, es capaz de continuar una conversación y no funciona mediante comandos. Los clientes pueden mandar un sms a Eno en cualquier momento a través de la página web, la aplicación móvil del banco para comprobar transacciones recientes, el saldo o incluso para informar sobre algún problema con la tarjeta de crédito. Tiene la capacidad de incluso avisar cuando se cobra de más por una factura.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{include/figuras/Eno.jpg}
+    \caption{Interfaz gráfica Eno}
+    \label{fig:eno}
+\end{figure}
+
+
+En España existen algunas alternativas como por ejemplo, la aplicación imaginBank implementado por La Caixa a través de Facebook Messenger.
+
+\subsubsection{Entretenimiento}
+Los chatbots también se pueden emplear para realizar planes y lugares de ocio. Un ejemplo de esto es el asistente Mahoudrid creado por la empresa Mahou en colaboración con Ontwice basándose en la guia de ocio de nombre homónimo. 
+
+Este asistente es capaz de recomendar locales, bares, tapas y planes. Es un bot conversacional implementado a través de Facebook Messenger mediante inteligencia artificial y te recomienda el plan perfecto en base a lo que desees tomar y tu estado de ánimo. 
+
+\subsubsection{Restauración}
+En la actualidad existen múltiples chatbots que ayudan al usuario a consultar recetas o consejos de dietética, sin embargo, el verdadero potencial de estos es el de poder recomendar restaurantes cercanos a la ubicación del usuario e incluso realizar un pedido simplemente escribiendo en un chat de mensajería instantánea y que lo tengas en tu casa en el menor tiempo posible sin tener que realizar ninguna llamada telefónica. 
+
+Un ejemplo es el chatbot desarrollado por Burguer King \cite{burguer} e implementado en WhatsApp que se muestra en la figura \ref{fig:burguer}.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{include/figuras/BurguerKing.png}
+    \caption{Chatbot Burguer King}
+    \label{fig:burguer}
+\end{figure}
