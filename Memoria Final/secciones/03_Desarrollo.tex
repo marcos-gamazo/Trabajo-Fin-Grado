@@ -32,6 +32,8 @@ A continuación, se mostrará la arquitectura en la que se rige este Trabajo de 
 
 Como se puede observar en la figura \ref{fig:arquitectura_general}, la API RestFul es el software encargado de gestionar e interactuar con la base de datos, sirviendo los datos a los usuarios. Para que el proyecto sea lo más escalable posible se ha decidido separar los servicios de forma que estén débilmente acopladas. 
 
+\section{Herramientas utilizadas}
+
 \subsection{Base de Datos}
 Para el proyecto Sonidos del Cielo hemos elegido MongoDB. En gran parte debido a que es una herramienta perfecta para entornos con bajos recursos de computación, no es necesario pagar ningún tipo de licencia, posee una gran comunidad y muy buena documentación, además de muy escalable. La ventaja principal de MongoDB es que los documentos no tienen que seguir una estructura definida, es decir, se puede trabajar con documentos independientes, modificar el contenido de uno de forma individual y no afectar a la estructura.
 
@@ -115,7 +117,7 @@ Es un lenguaje que se tiene una curva de aprendizaje muy rápida, además cuenta
 
 \subsection{Arquitectura aplicación RestFul}
 
-La aplicación RestFul no es más que el software que hace de intermediario para enviar información de la base de datos al cliente o para insertar datos desde el cliente a la base de datos. El cliente es aquel que consume la información, en nuestro caso, el chatbot. El servidor se ha desarrollado en Node.js. Fue diseñado para la construcción de aplicaciones escalables, siendo un punto muy a favor para nuestra elección. 
+La aplicación RestFul no es más que el software que hace de intermediario para enviar información de la base de datos al cliente o para insertar datos desde el cliente a la base de datos \cite{apiRest}. El cliente es aquel que consume la información, en nuestro caso, el chatbot. El servidor se ha desarrollado en Node.js. Fue diseñado para la construcción de aplicaciones escalables, siendo un punto muy a favor para nuestra elección. 
 
 \begin{figure}[h]
     \centering
@@ -230,7 +232,7 @@ Github cuenta con diversas herramientas de las que las más destacables son:
 \subsection{Swagger}
 Una de las partes más importantes en cualquier proyecto es la documentación del código. Es muy habitual en nuestro campo que hay que modificar, mantener o simplemente que utilizar código desarrollado por otra persona y se convierte en una tarea ardua que obliga a invertir demasiado tiempo en comprenderlo. 
 
-Para evitar estas situaciones es habitual adaptar herramientas que permitan comentar el código fuente del software que desarrollemos de tal manera que sea legible por cualquier persona. En el proyecto Sonidos del Cielo se ha decidido seleccionar la herramienta \textit{Swagger} para documentar la API RestFul. 
+Para evitar estas situaciones es habitual adaptar herramientas que permitan comentar el código fuente del software que desarrollemos de tal manera que sea legible por cualquier persona. En el proyecto Sonidos del Cielo se ha decidido seleccionar la herramienta \textit{Swagger}\cite{Swagger} para documentar la API RestFul. 
 
 Swagger se compone de una serie de herramientas, reglas y especificaciones mediante las cuales podremos documentar y probar una API de una manera sencilla. La principal baza para utilizar Swagger es que es realmente sencilla de implementar y cualquier persona es capaz de entenderlo, tenga conocimientos de programación o no. Esto es posible gracias a \textbf{Swagger UI}, es una de las características más importantes de la plataforma, esta herramienta nos permite organizar las operaciones CRUD de la API basándose en los ficheros YAML o JSON y creando un entorno interactivo.
 
@@ -243,7 +245,7 @@ Swagger se compone de una serie de herramientas, reglas y especificaciones media
 
 Para esta tarea podemos utilizar la versión del editor en línea, \textit{Swagger editor} que proporciona la plataforma como se muestra en la figura \ref{fig:swagger_online}, esta herramienta nos indicará los errores que se hayan cometido y además brindará sugerencias y alternativas para mejorar la documentación.
 
-Nuestra implementación pasa por la utilización de Swagger y Swagger UI como varios paquetes instalables dentro de Node.js a través del instalador npm. Dentro de la definición del servidor se incluyen las opciones del servidor como se muestra en la figura \ref{fig:swagger_options} entre las que cabe destacar la versión del API Rest, la versión OpenAPI o la información del proyecto.
+Nuestra implementación pasa por la utilización de Swagger y Swagger UI como varios paquetes instalables dentro de Node.js \cite{DocumentWithSwagger} a través del instalador npm. Dentro de la definición del servidor se incluyen las opciones del servidor como se muestra en la figura \ref{fig:swagger_options} entre las que cabe destacar la versión del API Rest, la versión OpenAPI o la información del proyecto.
 
 \begin{figure}[H]
     \centering
@@ -252,7 +254,7 @@ Nuestra implementación pasa por la utilización de Swagger y Swagger UI como va
     \label{fig:swagger_options}
 \end{figure}
 
-Una vez establecido los parámetros básicos del servidor y haber definido los componentes que forman la API Rest es momento de añadir el código YAML para crear la documentación de los distintos métodos. En ese código se indica el tipo de formato que se produce, \textbf{JSON} en nuestro caso, los códigos de respuesta que proporciona la API.
+Una vez establecido los parámetros básicos del servidor y haber definido los componentes que forman la API Rest es momento de añadir el código YAML \cite{AutomaticAPIDocumentation} para crear la documentación de los distintos métodos. En ese código se indica el tipo de formato que se produce, \textbf{JSON} en nuestro caso, los códigos de respuesta que proporciona la API.
 
 \begin{figure}[h]
     \centering
@@ -261,6 +263,144 @@ Una vez establecido los parámetros básicos del servidor y haber definido los c
     \label{fig:swagger_definition}
 \end{figure}
 
-Una vez estén comentados todos los métodos de nuestra API, se genera una interfaz gráfica similar a la mostrada en la figura \ref{fig:swagger_online} en el \textit{endpoint} que hayamos definido en dónde se pueden probar los métodos comentados a lo largo del código.
+Una vez estén comentados todos los métodos de nuestra API en los distintos \textit{endpoints} que se hayan definido se mostrará una interfaz gráfica una vez accedamos a la url indicada en las opciones que se observan en la figura \ref{fig:swagger_options} dando como resultado la interfaz que se observa en la figura \ref{fig:swagger_ui}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{include/capturas/SwaggerUI.png}
+    \caption{Interfaz web Swagger}
+    \label{fig:swagger_ui}
+\end{figure}
 
 \subsection{Postman}
+Durante el desarrollo del servicio de la API Rest es necesario comprobar si las operaciones se están realizando correctamente y si se arrojan los resultados esperados. Para comprobarlo existen herramientas diversas que van desde una sentencia \textit{curl} desde cualquier terminal de un sistema operativo a la utilización de herramientas gráficas que nos proporcionen información extra sobre las explotación de los métodos creados y sus resultados. 
+
+En esta última dirección, se hallan varias herramientas como pueden ser Advanced REST Client, Insomnia Rest Client, soapUI, Postman, etc. Para este trabajo se ha seleccionado \textbf{Postman} por el hecho de conocer la herramienta y su funcionamiento con anterioridad.
+
+En el momento de su creación, Postman fue diseñado como una extensión del navegador Google Chrome aunque en la actualidad ya existen aplicaciones nativas para Windows, Linux y macOS. Agrupa una variedad de utilidades y herramientas que ayudan en el diseño y desarrollo de un API Rest. Algunas de las más destacables son:
+
+\begin{itemize}
+    \item Creación de peticiones a APIs
+    \item Desarrollo de test de validación de la API
+    \item Entornos de trabajo
+\end{itemize}
+
+El interés principal de la utilización de esta herramienta es para realizar peticiones a la API y tener la capacidad de generar colecciones de peticiones que nos permitan testear de una forma sencilla y rápida.
+Todas las llamadas que se realicen en la API se guardan en colecciones. Todas las llamadas guardadas se pueden exportar a varios lenguajes de programación como se ve en la siguiente figura \ref{fig:postman_snippet}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{include/capturas/PostmanSnippet.png}
+    \caption{Generador de código en Postman}
+    \label{fig:postman_snippet}
+\end{figure}
+
+Otra característica interesante del programa es la capacidad de organizarse en entornos de trabajo, de esta forma si es necesario realizar test en más de un API Rest, además de poder definir variables y clasificarlas según los entornos de trabajo. También tiene una herramienta mediante la cual se puede generar automáticamente documentación de la API y exportar toda la configuración a un fichero JSON.
+
+
+\subsection{Docker}
+
+En cualquier proyecto de desarrollo de software que tenga un tamaño considerable siempre surge el mismo problema, el software que se ha desarrollado en una máquina tiene un rendimiento y funcionamiento diferentes al que tenía en la máquina del desarrollo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.05]{include/figuras/docker.png}
+    \caption{Logo de Docker}
+    \label{fig:docker_icon}
+\end{figure}
+
+\subsubsection{¿Qué es Docker?}
+Se trata de una herramienta de virtualización pero a diferencia de las máquinas virtuales tradicionales es posible levantar el servicio de una forma mucho más rápida y en sistemas operativos mucho más eficientes. 
+La idea principal es la de crear contenedores portables y ligeros de aplicaciones de software con la posibilidad de ejecutarse en cualquier dispositivo que tenga Docker instalado sin importar que sistema operativo esté funcionando \cite{docker}.
+
+\subsubsection{Elementos básicos}
+Docker se compone de tres elementos básicos
+
+\begin{itemize}
+    \item \textbf{Contenedor}: contiene todas las herramientas necesarias para el correcto funcionamiento de una aplicación sin necesidad de repositorios externos. Cada contenedor es una plataforma con sus propias directivas de seguridad y aislada del resto de la máquina.
+    \item \textbf{Imagen Docker}: la imagen de docker se puede ver como un sistema operativo mínimo con aplicaciones instaladas (Por ejemplo un sistema operativo RedHat con MySQL instalado). A partir de una base se pueden añadir más elementos que sean necesarios en otro equipo donde se vaya a utilizar la imagen. Docker además proporciona herramientas sencillas mediantes las cuales mantener las imágenes actualizadas.
+    \item \textbf{Docker Hub}: es el lugar donde se almacenan las imágenes creadas por otros usuarios de tal forma que cualquiera pueda utilizarlas. Existen repositorios públicos en los que todo el mundo puede utilizar las imágenes y repositorios privados en los cuales es necesario comprar las imágenes que se vayan a usar. Con estos registros es muy sencillo desarrollar nuevas imágenes utilizándolos como plantilla en la que añadir nuevos componentes.
+\end{itemize}
+
+\subsubsection{Funcionamiento}
+
+Docker incluye una interfaz gráfica como se muestra en la figura \ref{fig:dockerUI} para gestionar las imágenes y contenedores que existen en el equipo además de realizar los cambios necesarios para crear nuestra propia imagen.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{include/capturas/DockerUI.png}
+    \caption{Interfaz gráfica de Docker}
+    \label{fig:dockerUI}
+\end{figure}
+
+Partiendo del ejemplo de una aplicación web, ésta necesita diferentes tipos de software para poder ser desarrollada y desplegada (spring, MySQL, Tomcat, Maven...). 
+
+Docker permite introducir todo ese software dentro de un contenedor todas las herramientas que necesite la aplicación además de la propia aplicación. De esta forma, puedo transportar el contenedor a cualquier tipo de máquina (servidor, ordenador pórtatil, Raspberry PI, etc) que tenga instalado Docker y directamente ejecutar la aplicación sin necesidad de realizar instalaciones complementarias, ejecutar ninguna herramienta más o comprobar compatibilidades.
+
+Cada vez que se vaya a ejecutar el contenedor serán necesarias tanto la imagen base como las nuevas 'capas' que se han añadido. Docker automáticamente se encarga de acoplar la base, la imagen y las distintas capas para levantar el entorno deseado sobre el que poder trabajar. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{include/capturas/dockerRun.png}
+    \caption{Inicio de un contenedor docker}
+    \label{fig:docker_run}
+\end{figure}
+
+Esto se puede hacer de manera muy sencilla mediante un terminal \cite{basicDocker} y un comando como se ve en la figura \ref{fig:docker_run} en la que se realiza un despliegue de una imagen con MongoDB sobre la que se ha desarrollado la base de datos del proyecto.
+
+\subsubsection{Principales características}
+\begin{itemize}
+    \item Autogestión de los contenedores.
+    \item Posibilidad de desplegar múltiples contenedores en un mismo equipo.
+    \item Fiabilidad.
+    \item Contenedores ligeros que simplifican la labor de almacenamiento, transporte y despliegue.
+    \item Capacidad de ejecutar una gran variedad de aplicaciones.
+    \item Levantar los servicios es una operación muy rápida.
+    \item La aplicación Docker es capaz de gestionar los recursos de la máquina para asignarlos a los distintos contenedores.
+    \item Compartir las imágenes en Docker Hub.
+\end{itemize}
+
+\subsubsection{Tipos de despliegues}
+Existen varias formas de desplegar un contenedor en Docker, la más sencilla es la que se muestra en la figura \ref{fig:docker_run} en la que se puede crear un contenedor mediante un solo comando. 
+
+Otra forma de hacerlo es mediante un \textit{Dockerfile} como el que se muestra a continuación:
+
+\begin{lstlisting}
+FROM ubuntu:latest
+MAINTAINER john doe 
+
+RUN apt-get update
+RUN apt-get install -y python python-pip wget
+RUN pip install Flask
+
+ADD hello.py /home/hello.py
+
+WORKDIR /home
+\end{lstlisting}
+
+Su funcionamiento es muy sencillo, se crea un fichero de texto plano en el que se indica la imagen base a utilizar y posteriormente mediante mandatos de terminal se instalan las distintas herramientas a incluir en la imagen personalizada. Una vez generada la imagen con el comando docker build se puede desplegar el contenedor mediante la interfaz gráfica o mediante la terminal.
+
+\textit{Docker compose} es una herramienta pensada para definir y correr aplicaciones con múltiples contenedores, se pueden definir los distintos servicios que van a formar la aplicación dentro del fichero \textit{docker-compose.yml} de forma que pueden correr juntas en un entorno aislado.
+
+\vspace{.7cm}
+\begin{lstlisting}
+version: "3"
+services:
+  web:
+    build: .
+    ports:
+    - '5000:5000'
+    volumes:
+    - .:/code
+    - logvolume01:/var/log
+    links:
+    - redis
+  redis:
+    image: redis
+    volumes:
+      logvolume01: {}
+\end{lstlisting}
+
+Una vez creado el fichero, el contenedor se puede levantar simplemente con el comando \textit{docker-compose up}.
+
+\subsection{Rasa Framework}

@@ -29,11 +29,11 @@ El proyecto es responsabilidad de el equipo de investigadores y estudiantes del 
 \end{figure}
 
 En la actualidad los meteoros son conocidos por el público general debido a las lluvias de estrellas, las más conocidas son las Perseídas que de producen de manera anual entre los meses de julio y agosto; y las Gemínidas que provienen de un asteroide conocido como Faetón y se pueden observar en el mes de diciembre. La ambición de este proyecto es despertar el interés en los ciudadanos y realizar una tarea de divulgación desde un punto de vista científico. 
-Para poder detectar los meteoros se cuenta actualmente con una infraestructura de dos estaciones de radiodetección situadas en Fuenlabrada (Madrid) y Fregenal de la Sierra (Badajoz) construidas por miembros aficionados de la Agrupación Astronómica de Madrid Sur y del Grupo Docente de Astronomía Kepler, estas dos estaciones monitorizan la señal del radar GRAVES \cite{graves} ubicado en Dijón (Francia) que emite a 143.050 MHz mediante varias antenas de tipo Yagi, un receptor SDR \cite{ulversoy2010software} y gracias al programa de código abierto Echoes \cite{echoes} es posible generar una curva de luz, un espectrograma y el sonido de esta detección. 
+Para poder detectar los meteoros se cuenta actualmente con una infraestructura de dos estaciones de radiodetección situadas en Fuenlabrada (Madrid) y Fregenal de la Sierra (Badajoz) construidas por miembros aficionados de la Agrupación Astronómica de Madrid Sur y del Grupo Docente de Astronomía Kepler \cite{kepler}, estas dos estaciones monitorizan la señal del radar GRAVES \cite{graves} ubicado en Dijón (Francia) que emite a 143.050 MHz mediante varias antenas de tipo Yagi, un receptor SDR \cite{ulversoy2010software} y gracias al programa de código abierto Echoes \cite{echoes} es posible generar una curva de luz, un espectrograma y el sonido de esta detección. 
 
 \begin{figure} [h]
     \centering
-    \includegraphics[scale=0.40]{include/figuras/Radar.jpg}
+    \includegraphics[scale=0.35]{include/figuras/Radar.jpg}
     \caption{Funcionamiento del radar GRAVES}
     \label{fig:radar}
 \end{figure}
@@ -46,46 +46,25 @@ Como resultado del proyecto se pretende conseguir una clasificación de los mete
 
 \section{Objetivos}
 
+El objetivo principal de este trabajo de fin de grado es la construcción de un asistente virtual o chatbot que sea capaz de comunicarse con un usuario de forma autónoma. También se va a desarrollar todo el backend sobre el que se sostiene el proyecto Sonidos del Cielo del departamento de ciencia ciudadana de la Universidad Politécnica de Madrid.
 
-La introducción del TFG debe servir para que los profesores que evalúan el Trabajo puedan comprender el contexto en el que se realiza el mismo, y los objetivos que se plantean.
+Los objetivos del proyecto son los siguientes:
 
-Esta plantilla muestra la estructura básica de la memoria final de TFG, así como algunas instrucciones de formato.
-
-El esquema básico de una memoria final de TFG es el siguiente:
 \begin{itemize}
-\item[•] Resumen en español y inglés (máximo 2 páginas cada uno)
-\item[•] Tabla de contenidos
-\item[•] Introducción (con los objetivos del TFG)
-\item[•] Desarrollo
-\item[•] Resultados y conclusiones
-\item[•] Bibliografía (publicaciones utilizadas en el estudio y desarrollo del trabajo)
-\item[•] Anexos (opcional)
+    \item Mejora de la interfaz conversacional de un chatbot.
+    \item Integración de módulos de reconocimiento y sintetizador de voz.
+    \item Desarrollo de una interfaz web del experimento de clasificación de meteoros para público infantil.
+    \item Módulo para analizar los resultados obtenidos.
+    \item Desarrollo de una guía de usuario.
 \end{itemize}
 
-En cualquier caso, es el tutor del TFG quien indicará a su estudiante la estructura de memoria final que mejor se ajuste al trabajo desarrollado.
+\section{Estructura del documento}
 
-Con respecto al formato, se seguirán las siguientes pautas, que se muestran en esta plantilla:
 \begin{itemize}
-\item[•] \textit{Tamaño de papel:} DIN A4
-\item[•] \textit{Portada:} tal y como se recoge en esta plantilla, con indicación de universidad, centro, título de TFG y autor.
-\item[•] \textit{Segunda página:} información bibliográfica, incluyendo todos los datos del tutor del TFG.
-\item[•] \textit{Tipo de letra para texto.} Preferiblemente “Bookman Old Style” 11 puntos. Si no fuera posible, las alternativas recomendadas son, por orden de preferencia: “Palatino Linotype”, “Garamond” o “Georgia”.
-\item[•] \textit{Tipo de letra para código fuente:} “Consolas” o “Roboto mono”
-\item[•] \textit{Márgenes:} superior e inferior $3$ cm, izquierdo y derecho $2.54$ cm.
-\item[•] \textit{Secciones y subsecciones:} reseñadas con numeración decimal a continuación del número del capítulo. Ej.: subsecciones 2.3.1.
-\item[•] \textit{Números de página:} siempre centrado en margen inferior, página 1 comienza en capítulo 1, todas las secciones anteriores al capítulo 1 en número romano en minúscula (i, ii, iii…).
+\item Capítulo 1: Introducción al trabajo
+\item Capítulo 2: Este capítulo es el estado del arte sobre las tecnologías en las que está basado el trabajo de fin de grado. 
+\item Capítulo 3: En este capítulo se detallan las herramientas utilizadas y el desarrollo del proyecto.
+\item Capítulo 4: En este capítulo se especifican los resultados del trabajo y las posibles mejoras a implementar.
+\item Bibliografía: publicaciones utilizadas en el estudio y desarrollo del trabajo.
+\item Anexos (opcional)
 \end{itemize}
-
-\vspace*{1.5cm}
-Para elaborar la memoria final del TFG con esta plantilla, seguir los siguientes pasos:
-\begin{enumerate}
-\item Descargar e instalar MiKTeX:  \url{https://miktex.org/}
-\item Descargar e instalar un editor de \LaTeX~, por ejemplo Texmaker:\\
-\url{https://www.xm1math.net/texmaker/}
-
-\item Editar el archivo \textbf{secciones/ \_DatosTFG.tex}, que hay en la carpeta \textbf{secciones} de esta plantilla. Cumplimentar todos los datos pedidos en dicho archivo. Guardar y cerrar.
-\item Compilar el archivo \textbf{plantilla\_TFG.tex} (puede ser renombrado). Se generará como resultado un archivo \textbf{pdf}.
-\item Para escribir la memoria final del TFG se pueden añadir y/o modificar los archivos de la carpeta \textbf{secciones} como sea necesario. El resultado se obtiene al compilar el archivo \textbf{plantilla\_TFG.tex}. 
-\end{enumerate}
-
-%%---------------------------------------------------------
