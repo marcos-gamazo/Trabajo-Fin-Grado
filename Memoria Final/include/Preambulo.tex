@@ -22,6 +22,8 @@
 \usepackage[stable]{footmisc}
 \usepackage{parskip} % para separar párrafos con espacio.
 \usepackage{float}
+
+\counterwithout{figure}{chapter} %Para que las ilustraciones 
 %%-----------------------------------------------
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -40,6 +42,7 @@
 \renewcommand{\sectionmark}[1]{\markright{\textbf{\thesection. #1}}}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \newcommand{\bigrule}{\titlerule[0.5mm]}
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
 
 
 \usepackage{appendix}

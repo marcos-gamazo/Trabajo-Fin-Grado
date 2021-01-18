@@ -35,9 +35,9 @@ Como se puede observar en la figura \ref{fig:arquitectura_general}, la API RestF
 \section{Herramientas utilizadas}
 
 \subsection{Base de Datos}
-Para el proyecto Sonidos del Cielo hemos elegido MongoDB. En gran parte debido a que es una herramienta perfecta para entornos con bajos recursos de computación, no es necesario pagar ningún tipo de licencia, posee una gran comunidad y muy buena documentación, además de muy escalable. La ventaja principal de MongoDB es que los documentos no tienen que seguir una estructura definida, es decir, se puede trabajar con documentos independientes, modificar el contenido de uno de forma individual y no afectar a la estructura.
+Para el proyecto Sonidos del Cielo hemos elegido MongoDB (figura \ref{fig:mongo}). En gran parte debido a que es una herramienta perfecta para entornos con bajos recursos de computación, no es necesario pagar ningún tipo de licencia, posee una gran comunidad y muy buena documentación, además de muy escalable. La ventaja principal de MongoDB es que los documentos no tienen que seguir una estructura definida, es decir, se puede trabajar con documentos independientes, modificar el contenido de uno de forma individual y no afectar a la estructura.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.2]{include/figuras/mongo.png}
     \caption{Logo de MongoDB}
@@ -75,7 +75,7 @@ Las tablas obtenemos desde ficheros que se encuentran en un servidor del Spanish
 
 Aunque hemos explicado anteriormente que no es estrictamente necesario que existan relaciones entre las tablas, en este proyecto si que es necesario puesto que varias tablas proceden del mismo meteoroide.
 
-Una vez creada la base de datos y establecer usuarios para restringir el acceso a la misma, podemos realizar operaciones de consulta, inserción, eliminación y actualización de documentos, colecciones y bases de datos a través de la consola incluida dentro del paquete de instalación de MongoDB. 
+Una vez creada la base de datos y establecer usuarios para restringir el acceso a la misma, podemos realizar operaciones de consulta, inserción, eliminación y actualización de documentos, colecciones y bases de datos a través de la consola incluida dentro del paquete de instalación de MongoDB tal y como se indica en la figura \ref{fig:terminal_mongo}. 
 
 \begin{figure}[H]
     \centering
@@ -96,7 +96,7 @@ También existen herramientas gráficas para modificar cualquier parámetro de u
 \newpage
 \subsection{Lenguaje de Programación Python}
 
-Tanto para la carga de los documentos en la base de datos como para el desarrollo del chatbot ha sido necesario el uso del lenguaje de programación Python. Python es un lenguaje de programación creado a finales de los años 80 por Guido van Rossum en el Centro para las Matemáticas y la Informática de Países Bajos. Este lenguaje posee una gran flexibilidad que produce código ordenado, limpio y fácilmente legible. Sus principales características pueden resumirse en las siguientes\cite{python}:
+Tanto para la carga de los documentos en la base de datos como para el desarrollo del chatbot ha sido necesario el uso del lenguaje de programación Python (figura \ref{fig:Python}). Python es un lenguaje de programación creado a finales de los años 80 por Guido van Rossum en el Centro para las Matemáticas y la Informática de Países Bajos. Este lenguaje posee una gran flexibilidad que produce código ordenado, limpio y fácilmente legible. Sus principales características pueden resumirse en las siguientes\cite{python}:
 
 \begin{figure}[h]
     \centering
@@ -117,9 +117,9 @@ Es un lenguaje que se tiene una curva de aprendizaje muy rápida, además cuenta
 
 \subsection{Arquitectura aplicación RestFul}
 
-La aplicación RestFul no es más que el software que hace de intermediario para enviar información de la base de datos al cliente o para insertar datos desde el cliente a la base de datos \cite{apiRest}. El cliente es aquel que consume la información, en nuestro caso, el chatbot. El servidor se ha desarrollado en Node.js. Fue diseñado para la construcción de aplicaciones escalables, siendo un punto muy a favor para nuestra elección. 
+La aplicación RestFul no es más que el software que hace de intermediario para enviar información de la base de datos al cliente o para insertar datos desde el cliente a la base de datos \cite{apiRest}. El cliente es aquel que consume la información, en nuestro caso, el chatbot. El servidor se ha desarrollado en Node.js (figura \ref{fig:node}). Fue diseñado para la construcción de aplicaciones escalables, siendo un punto muy a favor para nuestra elección. 
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.15]{include/figuras/node.jpg}
     \caption{Logo de Node.js}
@@ -160,7 +160,7 @@ Está creado en NodeJS y Electron \cite{electron} y con Blink como motor gráfic
 
 Se trata de un editor hackeable, es decir, permite modificar el comportamiento del editor completamente (tema del editor, atajos de teclado, preferencias, etc), tiene soporte para Git integrado, autocompletado de código, terminal integrado y debugger.
 
-Además posee una biblioteca de extensiones \ref{fig:vscode} mediante la cual puedes añadir herramientas que ayuden en los proyectos o visualizar el código de forma más eficiente. También posees un live server a través del cual puedes visualizar código web en tu navegador predeterminado inmediatamente según guardas el código sin ser necesario refrescar.
+Además posee una biblioteca de extensiones (figura \ref{fig:vscode}) mediante la cual puedes añadir herramientas que ayuden en los proyectos o visualizar el código de forma más eficiente. También posees un live server a través del cual puedes visualizar código web en tu navegador predeterminado inmediatamente según guardas el código sin ser necesario refrescar.
 
 \begin{figure}[h]
     \centering
@@ -181,14 +181,13 @@ A continuación se explicará brevemente las extensiones utilizadas:.
 
 \subsection{Git y Github}
 
-
 En el desarrollo de cualquier proyecto de software surge la necesidad de gestionar los cambios que se producen entre versiones diferentes de un mismo código fuente. Habitualmente este proceso se inicia utilizando sufijos en los ficheros que se modifican (v1, antiguo, nuevo) pero este proceso no es ni eficiente ni práctico, mucho menos si trabajamos en equipo, dando lugar a la eliminación de archivos válidos realizados por otros componentes del equipo, incapacidad de conocer que cambios se han realizado, etc.
 
 En todo proyecto, más tarde o más temprano aparece la necesidad de trabajar en distintas ramas, en el entorno empresarial suelen ser desarrollo y producción. En la rama de desarrollo se procede a introducir las nuevas modificaciones y en la rama de desarrollo las versiones estables del programa.
 
-Para ayudarnos con esta tarea aparecen soluciones como Git, CVS que realizan tareas fundamentales como pueden ser:
+Para ayudarnos con esta tarea aparecen soluciones como Git (figura \ref{fig:git}), CVS que realizan tareas fundamentales como pueden ser:
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.1]{include/figuras/Git.png}
     \caption{Logo de Git}
@@ -209,7 +208,7 @@ En el caso del proyecto Sonidos del Cielo la herramienta de control de versiones
 Git surgió de la mano de Linus Torvals \cite{torvalds2005git}, es un sistema de control de versiones de código abierto, multiplataforma, lo que nos permite crear repositorios en cualquier sistema operativo. Existen gran variedad de herramientas gráficas para manejar Git pero lo más utilizado el la línea de comandos dado que, una vez aprendidos los comandos básicos, nos permite realizar las operaciones con mayor velocidad. 
 
 Github es un servicio para alojar repositorios creado en San Francisco en el año 2008. Está pensado para compartir código fuente en cualquier lenguaje de programación y dejarlo a disposición de cualquiera que quiera reutilizarlo siempre y cuando haya permiso para ello. Si cualquier otro usuario que no sea el creador del proyecto puede realizar un \textit{fork}, un fork no es otra cosa sino que la creación de una copia de otro proyecto en otro repositorio.
-También hay repositorios privados en los que sólo el creador del repositorio y las personas a las que el de acceso podrán participar.
+También hay repositorios privados en los que sólo el creador del repositorio y las personas a las que el de acceso podrán participar (figura \ref{fig:git_init}).
 
 \begin{figure}[h]
     \centering
@@ -254,7 +253,7 @@ Nuestra implementación pasa por la utilización de Swagger y Swagger UI como va
     \label{fig:swagger_options}
 \end{figure}
 
-Una vez establecido los parámetros básicos del servidor y haber definido los componentes que forman la API Rest es momento de añadir el código YAML \cite{AutomaticAPIDocumentation} para crear la documentación de los distintos métodos. En ese código se indica el tipo de formato que se produce, \textbf{JSON} en nuestro caso, los códigos de respuesta que proporciona la API.
+Una vez establecido los parámetros básicos del servidor y haber definido los componentes que forman la API Rest es momento de añadir el código YAML \cite{AutomaticAPIDocumentation} para crear la documentación de los distintos métodos. En ese código (figura \ref{fig:swagger_definition}) se indica el tipo de formato que se produce, \textbf{JSON} en nuestro caso, los códigos de respuesta que proporciona la API.
 
 \begin{figure}[h]
     \centering
@@ -300,7 +299,7 @@ Otra característica interesante del programa es la capacidad de organizarse en 
 
 \subsection{Docker}
 
-En cualquier proyecto de desarrollo de software que tenga un tamaño considerable siempre surge el mismo problema, el software que se ha desarrollado en una máquina tiene un rendimiento y funcionamiento diferentes al que tenía en la máquina del desarrollo.
+En cualquier proyecto de desarrollo de software que tenga un tamaño considerable siempre surge el mismo problema, el software que se ha desarrollado en una máquina tiene un rendimiento y funcionamiento diferentes al que tenía en la máquina del desarrollo. Para ello se ha decidido utilizar docker (figura \ref{fig:docker_icon})
 
 \begin{figure}[H]
     \centering
@@ -403,4 +402,135 @@ services:
 
 Una vez creado el fichero, el contenedor se puede levantar simplemente con el comando \textit{docker-compose up}.
 
-\subsection{Rasa Framework}
+\subsection{Rasa}
+
+Para la realización del chatbot y dado que era la parte primordial del proyecto fue necesario estudiar las diferentes alternativas que existen en el mercado. Por un lado, tenemos las alternativas privadas (Amazon Lex, DialogFlow, Microsoft Bot Framework) si bien es cierto que poseen todas las herramientas necesarias para desarrollarlo de una manera rápida y sencilla, en el momento que la aplicación creciese se volvería insostenible dado que la financiación es limitada y habría que desarrollar una nueva solución desde cero.
+
+Es por eso que pasamos a analizar las alternativas Open Source y a poder ser que tuviese todas o gran parte de las herramientas que tenían las alternativas privadas además de poder acoplarla con Frontends para la visualización vía web y la capacidad de poder realizar llamadas a APIs externas. Teniendo en cuenta todos estos requisitos, se llegó a la conclusión de que la mejor herramienta a utilizar era \textbf{Rasa} ya que incluía la mayoría de herramientas que se necesitaban, es una herramienta de código abierto y además cuenta con una comunidad muy grande que en caso de que exista algún tipo de error o fallo puede ser de gran utilidad.
+
+Dentro del framework tenemos herramientas mediante las cuales podemos definir las clases y los datos de entrenamiento del asistente y otros componentes que nos ayudarán en el diseño y el desarrollo del chatbot para nuestro proyecto. 
+
+\subsubsection{Rasa NLU}
+El nombre proviene de sus siglas en inglés \textit{''Natural Language Understanding''}, se trata del componente mediante el cual nuestro asistente debe enteder los mensajes que le está transmitiendo el usuario. A partir de los mensajes se busca una serie de parámetros conocidos como \textit{intents} y en caso de existir, las \textit{entities}.
+
+Los intents son todas las sentencias que introduce el usuario separadas según la finalidad. Un usuario es capaz de expresar una misma acción mediante distintas palabras \textit{utterances}. Por ejemplo, un usuario puede realizar un saludo de varias formas diferentes \textit{''Buenas'', ''Hola'', ''¿Que tal todo?''} o \textit{''hey''} y el asistente detectará de manera automática que se trata de un saludo.
+
+Dentro de un mensaje también es necesario analizar otro componente como son las entidades, que es la información clave, ya que a través de estás es posible personalizar la respuesta del asistente. Un ejemplo podría ser si al asistente le decimos \textit{''Qué tiempo va a hacer en \textbf{\{nombre\_ciudad\}}''}, donde nombre\_ciudad es una entidad que se podría utilizar para buscar el dato en una API externa. 
+
+En RASA, tanto los intents como las entities están definidas y almacenadas dentro de una carpeta que genera el propio framework conocida como \textit{data}. En el interior de esa carpeta existe un fichero en lenguaje \textit{Markdown} llamado nlu.md. Se entrará en la definición de los datos y los documentos de una forma más detallada más adelante. 
+
+Rasa NLU es un pipe por el cuál se introducen los mensajes. A esta herramienta se le pueden acoplar más librerías para mejorar el procesamiento de la entrada de mensajes, una de ellas puede ser \textit{Spacy}, que se trata de un componente mediante el cual se añaden elementos de aprendizaje en varios idiomas para el entrenamiento del asistente \cite{spacy}.
+
+\subsubsection{Rasa Core}
+Es una herramienta del asistente que posee gestión de diálogos basada en el aprendizaje mediante \textit{machine learning} que  es capaz de predecir la siguiente acción basada en la entrad del asistente, los datos de entrenamiento y el historial de conversaciones. Los datos de entrada están definidos en los diferentes \textit{stories} detallados más adelante.
+
+\subsubsection{Rasa NLG}
+El nombre procede de las siglas en inglés \textit{''Natural Language Generation''} y se trata del componente en el cuál están definidos todas las acciones y mensajes que el asistente puede utilizar para responder a mensajes proporcionados por el usuario y están definidas en las \textit{utterances}.
+
+\subsubsection{Procesado de un mensaje}
+El diagrama mostrado en la figura \ref{fig:rasa_flowchart} se puede ver la forma en la que Rasa NLU procesa un mensaje y como da la respuesta el Rasa Core.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{include/capturas/rasaFlowchart.png}
+    \caption{Proceso de clasificación de un mensaje}
+    \label{fig:rasa_flowchart}
+\end{figure}
+
+\begin{enumerate}
+    \item En primer lugar el usuario envía un mensaje que lo recibe el Rasa Stack que es el encargado de hacer la función de orquestador (se encarga de gestionar los comunicaciones entre distintas capas del framework).
+    \item El componente NLU del asistente se encarga de catalogar los intents que existen en el mensaje y extrae las características del mensaje (entities y slots). Esta parte muestra un porcentaje (grado de condifanza de la predicción) que en caso de ser inferior al 40\% se mostrará un mensaje mostrando que el asistente no ha entendido correctamente al usuario. Estos mensajes se pueden personalizar dentro de la plantilla \textit{utter\_default} del fichero domain.yml.
+    \item Además Rasa Core tiene que analizar qué acción tomar con el mensaje recibido, en función de las historias definidas durante el entrenamiento del chatbot. Se generan múltiples opciones aunque se selecciona la que tiene un mayor \% de coincidencia. Aquí es dónde se ejecutan las acciones, por ejemplo una consulta a una API o una base de datos externa.
+    \item Para terminar, el chatbot retorna la respuesta al usuario por el mismo canal de entrada.
+\end{enumerate}
+    
+\subsubsection{Componentes de Rasa}
+
+En esta sección se detallan las herramientas básicas del framework para entender la utilidad y el funcionamiento para saber si es necesario o no su utilización en nuestro proyecto.
+\vspace{1cm}
+\myparagraph{Intents}
+
+Son los mensajes más frecuentes definidos dentro del entorno del chatbot que se esperan que sucedan con el usuario. Los intents están encuadrados dentro del componente Rasa NLU tal y trata sobre cómo hay que clasificar los mensajes enviados por el usuario. En la figura \ref{fig:rasa_intent} se observa como se realiza la definición de un intent, en este caso el \textbf{intent greet}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{include/capturas/RasaIntent.png}
+    \caption{Definición del intent greet}
+    \label{fig:rasa_intent}
+\end{figure}
+
+\myparagraph{Utterances}
+
+Los utterances son las respuestas automáticas definidas que puede dar el asistente para responder los mensajes introducidos por el usuario. Se trata de una parte fundamental del componente Rasa NLU y se utilizan como una base para el entrenamiento del asistente. Están definidos dentro del fichero domain.yml como se ve en la figura \ref{fig:rasa_utterance} del proyecto y en él, hay que incluir todas y cada una de las posibles respuestas que el chatbot puede utilizar en cualquier momento de una conversación.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{include/capturas/RasaUtterance.png}
+    \caption{Definición de un utterance}
+    \label{fig:rasa_utterance}
+\end{figure}
+\vspace{1cm}
+
+\myparagraph{Slots}
+
+Se trata de uno de los componentes más importantes dentro del framework Rasa, en ellos se guarda toda la información destacable extraída de las conversaciones como puede ser el nombre de una ciudad o alguna respuesta que el usuario entrega al asistente tal y como se muestra en la figura \ref{fig:rasa_slot}. Se trata del componente que hace de memoria del programa y la cual es accesible desde fuera del chatbot de manera que se puede tener constancia del estado a tiempo real del asistente. Están asociados a los entities y se encuentran definidos dentro del fichero domain.yml.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{include/capturas/RasaSlot.png}
+    \caption{Definición de un slot}
+    \label{fig:rasa_slot}
+\end{figure}
+
+\myparagraph{Dominio}
+
+El dominio es el fichero en el cuál están definidos todos los componentes que conforman el universo del chatbot al momento de producirse una conversación con el usuario. En nuestro caso una vez presentado el mensaje inicial y recibido el nombre que proporciona el usuario, se presentan las distintos flujos que puede tomar la conversación. En la siguiente figura \ref{fig:rasa_domain} se presenta un ejemplo de definición de un fichero domain.yml
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{include/capturas/RasaDomain.png}
+    \caption{Definición de un dominio}
+    \label{fig:rasa_domain}
+\end{figure}
+
+
+\myparagraph{Actions}
+
+Las acciones en Rasa son funciones programadas en Python dentro del fichero \textit{actions.py} que se utilizan de forma que el asistente tenga un comportamiento programado ante una acción. Al realizarse en Python permite definir múltiples funcionalidades y es en este punto donde se debe desarrollar cualquier comportamiento personalizado dentro del bot, adeamás de retornar mensajes estáticos.
+
+Una acción se define de la siguiente manera:
+
+\begin{enumerate}
+    \item Se define una clase de tipo \textit{Action}
+    \item Dentro de esa clase, es necesario definir una función que retorne el nombre del action que se ha creado. Esto se realiza de la siguiente manera: 
+    \begin{lstlisting}[style=Python]
+    def name(sel) -> Text:
+        return "action_name"
+    \end{lstlisting}
+    \item Definimos la función \textit{run}, es aquí donde irá la lógica de la función.
+    \begin{lstlisting}
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Hello World!")
+
+        return []
+    \end{lstlisting}
+    \item Se manda el mensaje desde el \textit{dispatcher} mediante la función \textit{utter\_message(''mensaje''}. Este mensaje será el que envíe el chatbot al usuario
+    \item Por último se colocan las variables que sea necesario mantener
+\end{enumerate}
+
+Se puede observar la definición completa de un \textit{action} en la figura \ref{fig:rasa_action}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{include/capturas/RasaAction.png}
+    \caption{Definición de un action}
+    \label{fig:rasa_action}
+\end{figure}
+
+\myparagraph{Stories}
+
+Las stories del framework Rasa se utilizan como parte de los datos utilizados para entrenar al asistente y su módulo de gestión de diálogo. 
+
