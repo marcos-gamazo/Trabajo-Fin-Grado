@@ -17,8 +17,15 @@ Por cada estación existente hay una lista de reproducción, lo que significa qu
 Todos los datos existentes en la estación de Fuenlabrada pasan a través de un Pipeline gestionado mediante \textbf{Apache Airflow}. Este programa es un orquestador de servicios, es decir, es utilizado para automatizar tareas sistemáticas dividiendo estas mismas en subtareas. Los casos de uso más típicos son la automatización de carga de datos, acciones periódicas de mantenimiento y tareas de administración. Para ello permite el uso de herramientas como \textit{cron} y ejecutarlos bajo demanda.
 Mediante esta herramienta se envían los datos a un servidor existente en el Departamento de Arquitectura y Tecnología de Sistemas Informáticos. En este servidor existe una base de datos relacional en MySQL donde se almacenan los datos en bruto del programa Echoes. 
 
-Para entender mejor toda la estructura del proyecto, se incluye el siguiente diagrama explicativo.
+Para entender mejor toda la estructura del proyecto, se incluye el siguiente diagrama explicativo \ref{fig:estructura_proyecto}.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{{include/figuras/EstructuraProyecto.png}}
+    \caption{Arquitectura del proyecto}
+    \label{fig:estructura_proyecto}
+\end{figure}
+\newpage
 \section{Arquitectura General del Trabajo}
 
 A continuación, se mostrará la arquitectura en la que se rige este Trabajo de Fin de Grado.
@@ -35,7 +42,7 @@ Como se puede observar en la figura \ref{fig:arquitectura_general}, la API RestF
 \section{Herramientas utilizadas}
 
 \subsection{Base de Datos}
-Para el proyecto Sonidos del Cielo hemos elegido MongoDB (figura \ref{fig:mongo}). En gran parte debido a que es una herramienta perfecta para entornos con bajos recursos de computación, no es necesario pagar ningún tipo de licencia, posee una gran comunidad y muy buena documentación, además de muy escalable. La ventaja principal de MongoDB es que los documentos no tienen que seguir una estructura definida, es decir, se puede trabajar con documentos independientes, modificar el contenido de uno de forma individual y no afectar a la estructura.
+Para el proyecto Sonidos del Cielo hemos elegido MongoDB (figura \ref{fig:mongo}). En gran parte debido a que es una herramienta perfecta para entornos con bajos recursos de computación. No es necesario pagar ningún tipo de licencia, posee una gran comunidad y muy buena documentación, además de muy escalable. La ventaja principal de MongoDB es que los documentos no tienen que seguir una estructura definida, es decir, se puede trabajar con documentos independientes, modificar el contenido de uno de forma individual y no afectar a la estructura.
 
 \begin{figure}[H]
     \centering
@@ -57,25 +64,12 @@ La característica principal de MongoDB es la velocidad, dado que está escrito 
 \subsubsection{Funcionamiento de MongoDB}
 MongoDB está orientado a documentos. Esto significa que en lugar de guardar los datos en registros se guardan en documentos BSON, que no es otra cosa que un fichero JSON binario.
 Esto es una de las grandes diferencias respecto a las bases de datos relacionales. 
-MongoDb se compone de colecciones que a su vez está formado por documentos documentos. 
+MongoDb se compone de colecciones que a su vez está formado por documentos. 
 
 Si hiciésemos una comparación con los elementos de una base de datos relacional, se trataría de una tabla. Dentro de cada colección existen múltiples documentos que están compuestos de pares Clave-Valor. 
 La principal diferencia respecto a una base de datos relacional es que no es necesario que los documentos de una misma colección tengan el mismo formato ni los mismos campos.
 
-\subsubsection{Arquitectura de la Base de Datos}
-
-Las tablas obtenemos desde ficheros que se encuentran en un servidor del Spanish Virual Observatory (SVO) dentro del Departamento de Arquitectura y Tecnología de Sistemas Informáticos de la Escuela Técnica Superior de Ingenieros Informáticos de la Universidad Politécnica de Madrid. A partir de este fichero se crean las tablas que se aprecian en la figura \ref{fig:tablas_base_datos}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{include/figuras/Tablas.png}
-    \caption{Colecciones de la base de datos}
-    \label{fig:tablas_base_datos}
-\end{figure}
-
-Aunque hemos explicado anteriormente que no es estrictamente necesario que existan relaciones entre las tablas, en este proyecto si que es necesario puesto que varias tablas proceden del mismo meteoroide.
-
-Una vez creada la base de datos y establecer usuarios para restringir el acceso a la misma, podemos realizar operaciones de consulta, inserción, eliminación y actualización de documentos, colecciones y bases de datos a través de la consola incluida dentro del paquete de instalación de MongoDB tal y como se indica en la figura \ref{fig:terminal_mongo}. 
+Una vez creada la base de datos y establecidos los usuarios para restringir el acceso a la misma, podemos realizar operaciones de consulta, inserción, eliminación y actualización de documentos, colecciones y bases de datos a través de la consola incluida dentro del paquete de instalación de MongoDB tal y como se indica en la figura \ref{fig:terminal_mongo}. 
 
 \begin{figure}[H]
     \centering
@@ -84,7 +78,7 @@ Una vez creada la base de datos y establecer usuarios para restringir el acceso 
     \label{fig:terminal_mongo}
 \end{figure}
 
-También existen herramientas gráficas para modificar cualquier parámetro de una base de datos en Mongo como puede ser MongoDB Compass o Robo 3T. Estas herramientas proporcionan una vía más sencilla y visual para trabajar con las bases de datos además de no tener que aprender o buscar dentro de la documentación los comandos necesarios para manejar una interfaz de línea de comandos propietaria. Aunque también nos permite el ejecutar comandos como si se tratase del terminal como se puede observar en la figura \ref{fig:robo3t}.
+También existen herramientas gráficas para modificar cualquier parámetro de una base de datos en Mongo como puede ser MongoDB Compass o Robo 3T. Estas herramientas proporcionan una vía más sencilla y visual para trabajar con las bases de datos además de no tener que aprender o buscar dentro de la documentación los comandos necesarios para manejar una interfaz de línea de comandos propietaria. Aunque también nos permite ejecutar comandos como si se tratase del terminal como se puede observar en la figura \ref{fig:robo3t}.
 
 \begin{figure}[H]
     \centering
@@ -113,11 +107,11 @@ Tanto para la carga de los documentos en la base de datos como para el desarroll
     \item Multiparadigma: soporta programación funcional, programación imperativa, declarativo, modular, dirigido a eventos, programación asíncrona, lógico, estructurado, con restricciones y programación orientada a objetos.
 \end{itemize}
 
-Es un lenguaje que se tiene una curva de aprendizaje muy rápida, además cuenta con una gran comunidad lo que hace que existan librerías y módulos especializados desarrollados como \textit{pandas} (tratamiento de datos) \textit{librosa} (para procesamiento de audio), \textit{sklearn} (machine-learning) o frameworks como \textit{Django} (para desarrollo web) o en nuestro caso, \textbf{RASA} para desarrollar un chatbot. 
+Es un lenguaje que tiene una curva de aprendizaje muy rápida, además cuenta con una gran comunidad, lo que hace que existan librerías y módulos especializados desarrollados como \textit{pandas} (tratamiento de datos) \textit{librosa} (para procesamiento de audio), \textit{sklearn} (machine-learning) o frameworks como \textit{Django} (para desarrollo web) o en nuestro caso, \textbf{RASA} para desarrollar un chatbot. 
 
 \subsection{Arquitectura aplicación RestFul}
 
-La aplicación RestFul no es más que el software que hace de intermediario para enviar información de la base de datos al cliente o para insertar datos desde el cliente a la base de datos \cite{apiRest}. El cliente es aquel que consume la información, en nuestro caso, el chatbot. El servidor se ha desarrollado en Node.js (figura \ref{fig:node}). Fue diseñado para la construcción de aplicaciones escalables, siendo un punto muy a favor para nuestra elección. 
+La API RESTful no es más que el software que hace de intermediario para enviar información de la base de datos al cliente o para insertar datos desde el cliente a la base de datos \cite{apiRest}. El cliente es aquel que consume la información, en nuestro caso, el chatbot. El servidor se ha desarrollado en Node.js (figura \ref{fig:node}). Fue diseñado para la construcción de aplicaciones escalables, siendo un punto muy a favor para nuestra elección. 
 
 \begin{figure}[H]
     \centering
@@ -160,7 +154,7 @@ Está creado en NodeJS y Electron \cite{electron} y con Blink como motor gráfic
 
 Se trata de un editor hackeable, es decir, permite modificar el comportamiento del editor completamente (tema del editor, atajos de teclado, preferencias, etc), tiene soporte para Git integrado, autocompletado de código, terminal integrado y debugger.
 
-Además posee una biblioteca de extensiones (figura \ref{fig:vscode}) mediante la cual puedes añadir herramientas que ayuden en los proyectos o visualizar el código de forma más eficiente. También posees un live server a través del cual puedes visualizar código web en tu navegador predeterminado inmediatamente según guardas el código sin ser necesario refrescar.
+Además posee una biblioteca de extensiones (figura \ref{fig:vscode}) mediante la cual puedes añadir herramientas que ayuden en los proyectos o visualizar el código de forma más eficiente. También posee un live server a través del cual puedes visualizar código web en tu navegador predeterminado inmediatamente según guardas el código sin ser necesario refrescar.
 
 \begin{figure}[h]
     \centering
@@ -169,7 +163,7 @@ Además posee una biblioteca de extensiones (figura \ref{fig:vscode}) mediante l
     \label{fig:vscode}
 \end{figure}
 
-A continuación se explicará brevemente las extensiones utilizadas:.
+A continuación se explicarán brevemente las extensiones utilizadas:
 
 \begin{itemize}
     \item \textbf{Docker}: esta extensión simplifica la forma en la que construir, controlar y desplegar aplicaciones \textit{dockerizadas}, además proporciona herramientas dentro de un contenedor para realizar debugging de aplicaciones desarrolladas en Node.js, Python y .NET Core.
@@ -181,7 +175,7 @@ A continuación se explicará brevemente las extensiones utilizadas:.
 
 \subsection{Git y Github}
 
-En el desarrollo de cualquier proyecto de software surge la necesidad de gestionar los cambios que se producen entre versiones diferentes de un mismo código fuente. Habitualmente este proceso se inicia utilizando sufijos en los ficheros que se modifican (v1, antiguo, nuevo) pero este proceso no es ni eficiente ni práctico, mucho menos si trabajamos en equipo, dando lugar a la eliminación de archivos válidos realizados por otros componentes del equipo, incapacidad de conocer que cambios se han realizado, etc.
+En el desarrollo de cualquier proyecto de software surge la necesidad de gestionar los cambios que se producen entre versiones diferentes de un mismo código fuente. Habitualmente este proceso se inicia utilizando sufijos en los ficheros que se modifican (v1, antiguo, nuevo) pero este proceso no es ni eficiente ni práctico, mucho menos si trabajamos en equipo, dando lugar a la eliminación de archivos válidos realizados por otros componentes del equipo, incapacidad de conocer qué cambios se han realizado, etc.
 
 En todo proyecto, más tarde o más temprano aparece la necesidad de trabajar en distintas ramas, en el entorno empresarial suelen ser desarrollo y producción. En la rama de desarrollo se procede a introducir las nuevas modificaciones y en la rama de desarrollo las versiones estables del programa.
 
@@ -205,9 +199,11 @@ Para ayudarnos con esta tarea aparecen soluciones como Git (figura \ref{fig:git}
 
 En el caso del proyecto Sonidos del Cielo la herramienta de control de versiones utilizada ha sido \textbf{Git}. 
 
-Git surgió de la mano de Linus Torvals \cite{torvalds2005git}, es un sistema de control de versiones de código abierto, multiplataforma, lo que nos permite crear repositorios en cualquier sistema operativo. Existen gran variedad de herramientas gráficas para manejar Git pero lo más utilizado el la línea de comandos dado que, una vez aprendidos los comandos básicos, nos permite realizar las operaciones con mayor velocidad. 
+Git surgió de la mano de Linus Torvals \cite{torvalds2005git}, es un sistema de control de versiones de código abierto, multiplataforma, lo que nos permite crear repositorios en cualquier sistema operativo. Existen gran variedad de herramientas gráficas para manejar Git pero lo más utilizado es la línea de comandos dado que, una vez aprendidos los comandos básicos, nos permite realizar las operaciones con mayor velocidad. 
 
-Github es un servicio para alojar repositorios creado en San Francisco en el año 2008. Está pensado para compartir código fuente en cualquier lenguaje de programación y dejarlo a disposición de cualquiera que quiera reutilizarlo siempre y cuando haya permiso para ello. Si cualquier otro usuario que no sea el creador del proyecto puede realizar un \textit{fork}, un fork no es otra cosa sino que la creación de una copia de otro proyecto en otro repositorio.
+Github es un servicio para alojar repositorios creado en San Francisco en el año 2008. Está pensado para compartir código fuente en cualquier lenguaje de programación y dejarlo a disposición de cualquiera que quiera reutilizarlo siempre y cuando haya permiso para ello. 
+
+Cualquier otro usuario que no sea el creador del proyecto puede realizar un \textit{fork}, un fork no es otra cosa sino que la creación de una copia de otro proyecto en otro repositorio.
 También hay repositorios privados en los que sólo el creador del repositorio y las personas a las que el de acceso podrán participar (figura \ref{fig:git_init}).
 
 \begin{figure}[h]
@@ -223,17 +219,17 @@ Github cuenta con diversas herramientas de las que las más destacables son:
 \begin{itemize}
     \item Gollum: permite la creación de wikis basadas en git.
     \item Sistema de revisión de código: para añadir comentarios y discutir sobre las modificaciones realizadas.
-    \item Visor de ramas: dónde podremos revisar los avances del repositorio.
+    \item Visor de ramas: donde podremos revisar los avances del repositorio.
     \item Herramienta de seguimiento de problemas: nos permite abrir tickets de incidencias o mejoras a realizar.
 \end{itemize}
 
-
+\newpage
 \subsection{Swagger}
-Una de las partes más importantes en cualquier proyecto es la documentación del código. Es muy habitual en nuestro campo que hay que modificar, mantener o simplemente que utilizar código desarrollado por otra persona y se convierte en una tarea ardua que obliga a invertir demasiado tiempo en comprenderlo. 
+Una de las partes más importantes en cualquier proyecto es la documentación del código. Es muy habitual en nuestro campo que haya que modificar, mantener o simplemente utilizar código desarrollado por otra persona y se convierte en una tarea ardua que obliga a invertir demasiado tiempo en comprenderlo. 
 
 Para evitar estas situaciones es habitual adaptar herramientas que permitan comentar el código fuente del software que desarrollemos de tal manera que sea legible por cualquier persona. En el proyecto Sonidos del Cielo se ha decidido seleccionar la herramienta \textit{Swagger}\cite{Swagger} para documentar la API RestFul. 
 
-Swagger se compone de una serie de herramientas, reglas y especificaciones mediante las cuales podremos documentar y probar una API de una manera sencilla. La principal baza para utilizar Swagger es que es realmente sencilla de implementar y cualquier persona es capaz de entenderlo, tenga conocimientos de programación o no. Esto es posible gracias a \textbf{Swagger UI}, es una de las características más importantes de la plataforma, esta herramienta nos permite organizar las operaciones CRUD de la API basándose en los ficheros YAML o JSON y creando un entorno interactivo.
+Swagger se compone de una serie de herramientas, reglas y especificaciones mediante las cuales podremos documentar y probar una API de una manera sencilla. La principal baza para utilizar Swagger es que es realmente sencilla de implementar y cualquier persona es capaz de entenderlo, tenga conocimientos de programación o no. Esto es posible gracias a \textbf{Swagger UI}, es una de las características más importantes de la plataforma. Esta herramienta nos permite organizar las operaciones CRUD de la API basándose en los ficheros YAML o JSON y creando un entorno interactivo.
 
 \begin{figure}[H]
     \centering
@@ -242,7 +238,7 @@ Swagger se compone de una serie de herramientas, reglas y especificaciones media
     \label{fig:swagger_online}
 \end{figure}
 
-Para esta tarea podemos utilizar la versión del editor en línea, \textit{Swagger editor} que proporciona la plataforma como se muestra en la figura \ref{fig:swagger_online}, esta herramienta nos indicará los errores que se hayan cometido y además brindará sugerencias y alternativas para mejorar la documentación.
+Para esta tarea podemos utilizar la versión del editor en línea, \textit{Swagger editor} que proporciona la plataforma como se muestra en la figura \ref{fig:swagger_online}. Esta herramienta nos indicará los errores que se hayan cometido y además brindará sugerencias y alternativas para mejorar la documentación.
 
 Nuestra implementación pasa por la utilización de Swagger y Swagger UI como varios paquetes instalables dentro de Node.js \cite{DocumentWithSwagger} a través del instalador npm. Dentro de la definición del servidor se incluyen las opciones del servidor como se muestra en la figura \ref{fig:swagger_options} entre las que cabe destacar la versión del API Rest, la versión OpenAPI o la información del proyecto.
 
@@ -253,7 +249,7 @@ Nuestra implementación pasa por la utilización de Swagger y Swagger UI como va
     \label{fig:swagger_options}
 \end{figure}
 
-Una vez establecido los parámetros básicos del servidor y haber definido los componentes que forman la API Rest es momento de añadir el código YAML \cite{AutomaticAPIDocumentation} para crear la documentación de los distintos métodos. En ese código (figura \ref{fig:swagger_definition}) se indica el tipo de formato que se produce, \textbf{JSON} en nuestro caso, los códigos de respuesta que proporciona la API.
+Una vez establecidos los parámetros básicos del servidor y haber definido los componentes que forman la API Rest, es momento de añadir el código YAML \cite{AutomaticAPIDocumentation} para crear la documentación de los distintos métodos. En ese código (figura \ref{fig:swagger_definition}) se indica el tipo de formato que se produce, \textbf{JSON} en nuestro caso. Los códigos de respuesta que proporciona la API.
 
 \begin{figure}[h]
     \centering
@@ -294,9 +290,9 @@ Todas las llamadas que se realicen en la API se guardan en colecciones. Todas la
     \label{fig:postman_snippet}
 \end{figure}
 
-Otra característica interesante del programa es la capacidad de organizarse en entornos de trabajo, de esta forma si es necesario realizar test en más de un API Rest, además de poder definir variables y clasificarlas según los entornos de trabajo. También tiene una herramienta mediante la cual se puede generar automáticamente documentación de la API y exportar toda la configuración a un fichero JSON.
+Otra característica interesante del programa es la capacidad de organizarse en entornos de trabajo. Gracias a esta característica, si es necesario realizar test en más de un API Rest, además de poder definir variables y clasificarlas según los entornos de trabajo. También tiene una herramienta mediante la cual se puede generar automáticamente documentación de la API y exportar toda la configuración a un fichero JSON.
 
-
+\newpage
 \subsection{Docker}
 
 En cualquier proyecto de desarrollo de software que tenga un tamaño considerable siempre surge el mismo problema, el software que se ha desarrollado en una máquina tiene un rendimiento y funcionamiento diferentes al que tenía en la máquina del desarrollo. Para ello se ha decidido utilizar docker (figura \ref{fig:docker_icon})
@@ -317,7 +313,7 @@ Docker se compone de tres elementos básicos
 
 \begin{itemize}
     \item \textbf{Contenedor}: contiene todas las herramientas necesarias para el correcto funcionamiento de una aplicación sin necesidad de repositorios externos. Cada contenedor es una plataforma con sus propias directivas de seguridad y aislada del resto de la máquina.
-    \item \textbf{Imagen Docker}: la imagen de docker se puede ver como un sistema operativo mínimo con aplicaciones instaladas (Por ejemplo un sistema operativo RedHat con MySQL instalado). A partir de una base se pueden añadir más elementos que sean necesarios en otro equipo donde se vaya a utilizar la imagen. Docker además proporciona herramientas sencillas mediantes las cuales mantener las imágenes actualizadas.
+    \item \textbf{Imagen Docker}: la imagen de docker se puede ver como un sistema operativo mínimo con aplicaciones instaladas (Por ejemplo un sistema operativo RedHat con MySQL instalado). A partir de una base se pueden añadir más elementos que sean necesarios en otro equipo donde se vaya a utilizar la imagen. Docker además proporciona herramientas sencillas mediante las cuales se mantienen las imágenes actualizadas.
     \item \textbf{Docker Hub}: es el lugar donde se almacenan las imágenes creadas por otros usuarios de tal forma que cualquiera pueda utilizarlas. Existen repositorios públicos en los que todo el mundo puede utilizar las imágenes y repositorios privados en los cuales es necesario comprar las imágenes que se vayan a usar. Con estos registros es muy sencillo desarrollar nuevas imágenes utilizándolos como plantilla en la que añadir nuevos componentes.
 \end{itemize}
 
@@ -334,7 +330,7 @@ Docker incluye una interfaz gráfica como se muestra en la figura \ref{fig:docke
 
 Partiendo del ejemplo de una aplicación web, ésta necesita diferentes tipos de software para poder ser desarrollada y desplegada (spring, MySQL, Tomcat, Maven...). 
 
-Docker permite introducir todo ese software dentro de un contenedor todas las herramientas que necesite la aplicación además de la propia aplicación. De esta forma, puedo transportar el contenedor a cualquier tipo de máquina (servidor, ordenador pórtatil, Raspberry PI, etc) que tenga instalado Docker y directamente ejecutar la aplicación sin necesidad de realizar instalaciones complementarias, ejecutar ninguna herramienta más o comprobar compatibilidades.
+Docker permite introducir dentro de un contenedor todas las herramientas que necesite la aplicación además de la propia aplicación. De esta forma, puedo transportar el contenedor a cualquier tipo de máquina (servidor, ordenador pórtatil, Raspberry PI, etc) que tenga instalado Docker y directamente ejecutar la aplicación sin necesidad de realizar instalaciones complementarias, ejecutar ninguna herramienta más o comprobar compatibilidades.
 
 Cada vez que se vaya a ejecutar el contenedor serán necesarias tanto la imagen base como las nuevas 'capas' que se han añadido. Docker automáticamente se encarga de acoplar la base, la imagen y las distintas capas para levantar el entorno deseado sobre el que poder trabajar. 
 
@@ -404,7 +400,7 @@ Una vez creado el fichero, el contenedor se puede levantar simplemente con el co
 
 \subsection{Rasa}
 
-Para la realización del chatbot y dado que era la parte primordial del proyecto fue necesario estudiar las diferentes alternativas que existen en el mercado. Por un lado, tenemos las alternativas privadas (Amazon Lex, DialogFlow, Microsoft Bot Framework) si bien es cierto que poseen todas las herramientas necesarias para desarrollarlo de una manera rápida y sencilla, en el momento que la aplicación creciese se volvería insostenible dado que la financiación es limitada y habría que desarrollar una nueva solución desde cero.
+Para la realización del chatbot y dado que era la parte primordial del proyecto fue necesario estudiar las diferentes alternativas que existen en el mercado. Por un lado, tenemos las alternativas privadas (Amazon Lex, DialogFlow, Microsoft Bot Framework). Si bien es cierto que poseen todas las herramientas necesarias para desarrollarlo de una manera rápida y sencilla, en el momento que la aplicación creciese se volvería insostenible dado que la financiación es limitada y habría que desarrollar una nueva solución desde cero.
 
 Es por eso que pasamos a analizar las alternativas Open Source y a poder ser que tuviese todas o gran parte de las herramientas que tenían las alternativas privadas además de poder acoplarla con Frontends para la visualización vía web y la capacidad de poder realizar llamadas a APIs externas. Teniendo en cuenta todos estos requisitos, se llegó a la conclusión de que la mejor herramienta a utilizar era \textbf{Rasa} ya que incluía la mayoría de herramientas que se necesitaban, es una herramienta de código abierto y además cuenta con una comunidad muy grande que en caso de que exista algún tipo de error o fallo puede ser de gran utilidad.
 
@@ -415,20 +411,20 @@ El nombre proviene de sus siglas en inglés \textit{''Natural Language Understan
 
 Los intents son todas las sentencias que introduce el usuario separadas según la finalidad. Un usuario es capaz de expresar una misma acción mediante distintas palabras \textit{utterances}. Por ejemplo, un usuario puede realizar un saludo de varias formas diferentes \textit{''Buenas'', ''Hola'', ''¿Que tal todo?''} o \textit{''hey''} y el asistente detectará de manera automática que se trata de un saludo.
 
-Dentro de un mensaje también es necesario analizar otro componente como son las entidades, que es la información clave, ya que a través de estás es posible personalizar la respuesta del asistente. Un ejemplo podría ser si al asistente le decimos \textit{''Qué tiempo va a hacer en \textbf{\{nombre\_ciudad\}}''}, donde nombre\_ciudad es una entidad que se podría utilizar para buscar el dato en una API externa. 
+Dentro de un mensaje también es necesario analizar otro componente como son las entidades, que es la información clave, ya que a través de estas es posible personalizar la respuesta del asistente. Un ejemplo podría ser si al asistente le decimos \textit{''Qué tiempo va a hacer en \textbf{\{nombre\_ciudad\}}''}, donde nombre\_ciudad es una entidad que se podría utilizar para buscar el dato en una API externa. 
 
 En RASA, tanto los intents como las entities están definidas y almacenadas dentro de una carpeta que genera el propio framework conocida como \textit{data}. En el interior de esa carpeta existe un fichero en lenguaje \textit{Markdown} llamado nlu.md. Se entrará en la definición de los datos y los documentos de una forma más detallada más adelante. 
 
 Rasa NLU es un pipe por el cuál se introducen los mensajes. A esta herramienta se le pueden acoplar más librerías para mejorar el procesamiento de la entrada de mensajes, una de ellas puede ser \textit{Spacy}, que se trata de un componente mediante el cual se añaden elementos de aprendizaje en varios idiomas para el entrenamiento del asistente \cite{spacy}.
 
 \subsubsection{Rasa Core}
-Es una herramienta del asistente que posee gestión de diálogos basada en el aprendizaje mediante \textit{machine learning} que  es capaz de predecir la siguiente acción basada en la entrad del asistente, los datos de entrenamiento y el historial de conversaciones. Los datos de entrada están definidos en los diferentes \textit{stories} detallados más adelante.
+Es una herramienta del asistente que posee gestión de diálogos basada en el aprendizaje mediante \textit{machine learning} que  es capaz de predecir la siguiente acción basada en la entrada del asistente, los datos de entrenamiento y el historial de conversaciones. Los datos de entrada están definidos en los diferentes \textit{stories} detallados más adelante.
 
 \subsubsection{Rasa NLG}
 El nombre procede de las siglas en inglés \textit{''Natural Language Generation''} y se trata del componente en el cuál están definidos todas las acciones y mensajes que el asistente puede utilizar para responder a mensajes proporcionados por el usuario y están definidas en las \textit{utterances}.
 
 \subsubsection{Procesado de un mensaje}
-El diagrama mostrado en la figura \ref{fig:rasa_flowchart} se puede ver la forma en la que Rasa NLU procesa un mensaje y como da la respuesta el Rasa Core.
+En el diagrama mostrado en la figura \ref{fig:rasa_flowchart} se puede ver la forma en la que Rasa NLU procesa un mensaje y cómo da la respuesta el Rasa Core.
 
 \begin{figure}[H]
     \centering
@@ -438,7 +434,7 @@ El diagrama mostrado en la figura \ref{fig:rasa_flowchart} se puede ver la forma
 \end{figure}
 
 \begin{enumerate}
-    \item En primer lugar el usuario envía un mensaje que lo recibe el Rasa Stack que es el encargado de hacer la función de orquestador (se encarga de gestionar los comunicaciones entre distintas capas del framework).
+    \item En primer lugar el usuario envía un mensaje que lo recibe el Rasa Stack que es el encargado de hacer la función de orquestador (se encarga de gestionar las comunicaciones entre distintas capas del framework).
     \item El componente NLU del asistente se encarga de catalogar los intents que existen en el mensaje y extrae las características del mensaje (entities y slots). Esta parte muestra un porcentaje (grado de condifanza de la predicción) que en caso de ser inferior al 40\% se mostrará un mensaje mostrando que el asistente no ha entendido correctamente al usuario. Estos mensajes se pueden personalizar dentro de la plantilla \textit{utter\_default} del fichero domain.yml.
     \item Además Rasa Core tiene que analizar qué acción tomar con el mensaje recibido, en función de las historias definidas durante el entrenamiento del chatbot. Se generan múltiples opciones aunque se selecciona la que tiene un mayor \% de coincidencia. Aquí es dónde se ejecutan las acciones, por ejemplo una consulta a una API o una base de datos externa.
     \item Para terminar, el chatbot retorna la respuesta al usuario por el mismo canal de entrada.
@@ -450,7 +446,7 @@ En esta sección se detallan las herramientas básicas del framework para entend
 \vspace{1cm}
 \myparagraph{Intents}
 
-Son los mensajes más frecuentes definidos dentro del entorno del chatbot que se esperan que sucedan con el usuario. Los intents están encuadrados dentro del componente Rasa NLU tal y trata sobre cómo hay que clasificar los mensajes enviados por el usuario. En la figura \ref{fig:rasa_intent} se observa como se realiza la definición de un intent, en este caso el \textbf{intent greet}.
+Son los mensajes más frecuentes definidos dentro del entorno del chatbot que se espera que sucedan con el usuario. Los intents están encuadrados dentro del componente Rasa NLU tal y trata sobre cómo hay que clasificar los mensajes enviados por el usuario. En la figura \ref{fig:rasa_intent} se observa cómo se realiza la definición de un intent, en este caso el \textbf{intent greet}.
 
 \begin{figure}[H]
     \centering
@@ -473,7 +469,7 @@ Los utterances son las respuestas automáticas definidas que puede dar el asiste
 
 \myparagraph{Slots}
 
-Se trata de uno de los componentes más importantes dentro del framework Rasa, en ellos se guarda toda la información destacable extraída de las conversaciones como puede ser el nombre de una ciudad o alguna respuesta que el usuario entrega al asistente tal y como se muestra en la figura \ref{fig:rasa_slot}. Se trata del componente que hace de memoria del programa y la cual es accesible desde fuera del chatbot de manera que se puede tener constancia del estado a tiempo real del asistente. Están asociados a los entities y se encuentran definidos dentro del fichero domain.yml.
+Se trata de uno de los componentes más importantes dentro del framework Rasa. En ellos se guarda toda la información destacable extraída de las conversaciones como puede ser el nombre de una ciudad o alguna respuesta que el usuario entrega al asistente tal y como se muestra en la figura \ref{fig:rasa_slot}. Se trata del componente que hace de memoria del programa y la cual es accesible desde fuera del chatbot de manera que se puede tener constancia del estado a tiempo real del asistente. Están asociados a los entities y se encuentran definidos dentro del fichero domain.yml.
 
 \begin{figure}[H]
     \centering
@@ -496,7 +492,7 @@ El dominio es el fichero en el cuál están definidos todos los componentes que 
 
 \myparagraph{Actions}
 
-Las acciones en Rasa son funciones programadas en Python dentro del fichero \textit{actions.py} que se utilizan de forma que el asistente tenga un comportamiento programado ante una acción. Al realizarse en Python permite definir múltiples funcionalidades y es en este punto donde se debe desarrollar cualquier comportamiento personalizado dentro del bot, adeamás de retornar mensajes estáticos.
+Las acciones en Rasa son funciones programadas en Python dentro del fichero \textit{actions.py} que se utilizan de forma que el asistente tenga un comportamiento programado ante una acción. Al realizarse en Python permite definir múltiples funcionalidades y es en este punto donde se debe desarrollar cualquier comportamiento personalizado dentro del bot, además de retornar mensajes estáticos.
 
 Una acción se define de la siguiente manera:
 
@@ -525,12 +521,104 @@ Se puede observar la definición completa de un \textit{action} en la figura \re
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{include/capturas/RasaAction.png}
+    \includegraphics[width=\textwidth]{include/capturas/RasaAction.png}
     \caption{Definición de un action}
     \label{fig:rasa_action}
 \end{figure}
 
 \myparagraph{Stories}
 
-Las stories del framework Rasa se utilizan como parte de los datos utilizados para entrenar al asistente y su módulo de gestión de diálogo. 
+Las stories de Rasa son un elemento mediante el cual se especifica las diferentes variaciones disponibles dentro del flujo de conversación, es importante definir todas las distintas ramas que puede tomar la conversación para que el chatbot sepa en todo momento que camino escoger. Esto se realiza mediante la secuencia de intents y actions (ya sean custom actions o utterances). La definición de las stories se realiza en YAML como se muestra en la figura \ref{fig:rasa_story}.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{include/capturas/RasaStories.png}
+    \caption{Definición de un story}
+    \label{fig:rasa_story}
+\end{figure}
+
+\myparagraph{Rules}
+
+En Rasa las reglas son pequeñas porciones del flujo de diálogo que siempre tienen un camino concreto, es decir, son interacciones en las que siempre se recibe la misma respuesta o un el mismo conjunto de respuestas. Se utilizan principalmente para responder preguntas frecuentes. Se definen de la siguiente forma:
+
+\begin{lstlisting}
+    version: "2.0"
+
+rules:
+
+- rule: da las opciones disponibles
+  steps:
+  - intent: opciones
+  - action: utter_opciones
+\end{lstlisting}
+
+Esta regla lo que nos permite es que siempre que el usuario introduzca una cadena y el chatbot detecte que está solicitando las opciones, nos muestre un menú con todas las opciones disponibles a realizar en el chatbot.
+
+\myparagraph{Conectores}
+
+Los conectores son elementos que facilitan la conexión entre el asistente con los canales de entrada y salida de información. Posee gran variedad de conectores preestablecidos aunque también se pueden desarrollar conectores personalizados para otros servicios.
+
+Estos son los conectores predefinidos:
+\begin{itemize}
+    \item Web
+    \item Facebook Messenger
+    \item Slack
+    \item Telegram
+    \item Twilio
+    \item Google Hangouts Chat
+    \item Microsoft Bot Framework
+    \item Cisco Webex Teams
+    \item RocketChat
+\end{itemize}
+
+En nuestro caso hemos utilizado un canal de tipo REST. Una vez que se haya activado el canal y esté el servidor levantado, podremos interactuar con el chatbot enviando mensajes a través de un método POST en la dirección http://<host>:<port>/web-hooks/rest/webhook mediante mensajes con formato request como se muestra en la figura \ref{fig:rasa_request}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{include/capturas/RasaRequest.png}
+    \caption{Request de un mensaje a través del canal REST}
+    \label{fig:rasa_request}
+\end{figure}
+
+
+La respuesta que proporciona Rasa es un body que contiene un JSON con las diferentes respuestas que brinda el asistente, tal y como se puede ver en la figura \ref{fig:rasa_response}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{include/capturas/RasaResponse.png}
+    \caption{Response de un mensaje a través del canal REST}
+    \label{fig:rasa_response}
+\end{figure}
+
+\subsection{HTML}
+
+Es necesario recalcar las principales mejoras de HTML respecto a su versión predecesora HTML 4.01 \cite{lujan2011html5}.
+
+\begin{itemize}
+    \item Manejo de los gráficos vectoriales, audio y video desde HTML mediante la utilización de etiquetas. Se incorporan las etiquetas <audio> para controlar ficheros de sonido, <video> para el uso de archivos de video, <canvas> para crear dibujos y <svg> para el tratamiento de gráficos vectoriales.
+    \item Creación de nuevas etiquetas como para la simplificación de la sintaxis.
+    \item Mejora de los formularios adaptándose a nuevas entradas como email, number, time, etc.
+    \item Control de APIs mediante Javascript
+\end{itemize}
+
+En la figura siguiente \ref{fig:html5} se enseña un ejemplo de estructura de una página web desarrollada en HTML5. La estructura se compone principalmente de una cabecera o head, definida mediante la etiqueta <head> y siendo necesario especificar la codificación de caracteres a usar a través de la etiqueta <meta>. Indicamos el título de la página mediante la etiqueta <title>. A continuación estableceremos la etiqueta <body>, que es el cuerpo de la página web. En este ejemplo aparece una etiqueta <p> que define un párrafo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{include/capturas/Html5.png}
+    \caption{Estructura de un fichero HTML5}
+    \label{fig:html5}
+\end{figure}
+
+\subsection{CSS3}
+
+CSS es un lenguaje de hojas de estilo en cascada, en otras palabras, es el encargado de definir la apariencia que deben adquirir los documentos HTML. Engloba todo lo relativo a fuente, colores, líneas, altura, márgenes. Estas operaciones se pueden realizar mediante etiquetas HTML pero es mucho más tedioso y complicado. 
+
+En un primer momento, CSS se utilizaba tal y como se ha expuesto en el párrafo anterior, aunque en la actualidad es capaz de generar animaciones, transformaciones y otros efectos de mayor complejidad. En la siguiente figura \ref{fig:css} se muestra un extracto del fichero CSS utilizado en el proyecto.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{include/capturas/Css.png}
+    \caption{Estructura de un fichero HTML con referencia al fichero CSS}
+    \label{fig:css}
+\end{figure}
